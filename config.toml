@@ -1,0 +1,43 @@
+baseURL = "https://thong-mai.github.io/"
+relativeURLs = false
+canonifyURLs = true
+theme = 'hugo-theme-learn'
+publishDir = "public"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+[params]
+  themeVariant = "workshop"
+  editURL = ""
+  description = ""
+  author = "thongmnse181865@fpt.edu.vn"
+  showVisitedLinks = true
+  disableBreadcrumb = false
+  disableNextPrev = false
+  alwaysopen = true
+
+[languages]
+  [languages.en]
+    title = "Report"
+    weight = 1
+    languageName = "English"
+    [[languages.en.menu.shortcuts]]
+      name = "<i class='fab fa-facebook'></i> AWS Study Group"
+      identifier = "AWS Study Group FB"
+      url = "https://www.facebook.com/groups/awsstudygroupfcj/"
+      weight = 20
+
+  [languages.vi]
+    title = "Báo Cáo"
+    weight = 2
+    languageName = "Tiếng Việt"
+    [[languages.vi.menu.shortcuts]]
+      name = "<i class='fab fa-facebook'></i> AWS Study Group"
+      identifier = "AWS Study Group FB"
+      url = "https://www.facebook.com/groups/awsstudygroupfcj/"
+      weight = 20
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
