@@ -1,12 +1,6 @@
 ---
-title: "5.2. Architecture Walkthrough"
+title: "Architecture Walkthrough"
 weight: 52
----
-
-# Architecture Walkthrough
-
-This section walks through the main components of the architecture and how they map to your **SBW_Project** resources.
-
 ---
 
 ## 5.2.1 User-Facing Domain
@@ -178,7 +172,7 @@ These enable **SSM Session Manager** traffic to stay within AWS private networki
 
 ---
 
-## 5.2.5 Hands-on Mapping (to LABs)
+## 5.2.5 Mapping
 
 - **VPC + EC2 setup** → see **LAB1 – Networking & EC2**  
 - **S3 + Ingestion Lambda + API Gateway** → see **LAB2 – S3, Lambda Ingest & API Gateway**  

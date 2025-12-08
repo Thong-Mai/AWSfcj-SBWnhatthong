@@ -1,12 +1,6 @@
 ---
-title: "5.1. Objectives & Scope"
+title: "Objectives & Scope"
 weight: 51
----
-
-# Objectives & Scope
-
-This section describes the **purpose, learning goals, and scope** of the workshop that builds a batch-based clickstream analytics platform for a real e-commerce website (selling computer products) using your **SBW_Project** environment.
-
 ---
 
 ### Business Context

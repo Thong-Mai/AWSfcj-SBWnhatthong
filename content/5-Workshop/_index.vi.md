@@ -2,7 +2,7 @@
 title: "5. Workshop"
 menuTitle: "5. Workshop"
 weight: 5
-chapter: true
+chapter: false
 pre: "<b>5. </b>"
 ---
 

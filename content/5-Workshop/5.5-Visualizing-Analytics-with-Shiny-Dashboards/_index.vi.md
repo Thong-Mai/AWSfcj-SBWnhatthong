@@ -1,14 +1,6 @@
 ---
-title: "5.5. Visualizing Analytics with Shiny Dashboards"
+title: "Visualizing Analytics with Shiny Dashboards"
 weight: 55
----
-
-# Visualizing Analytics with Shiny Dashboards
-
-Phần này giải thích cách **R Shiny Server** trên `SBW_EC2_ShinyDWH` biến các bảng trong Data Warehouse thành dashboard tương tác, và cách truy cập an toàn thông qua **SSM port forwarding**.
-
-> Chi tiết lab nằm trong **LAB5 – R Shiny Analytics & End-to-End Validation**.
-
 ---
 
 ## 5.5.1 R Shiny trên EC2 Data Warehouse
@@ -102,13 +94,4 @@ Một quy trình test điển hình:
 5. **Refresh Shiny dashboard**:
    - Xác nhận số liệu / biểu đồ phản ánh đúng các tương tác vừa sinh ra  
 
-Nếu cả 5 bước đều ổn, nền tảng clickstream analytics của bạn đã **hoạt động end-to-end**.
 
----
-
-## 5.5.5 Mapping sang LABs
-
-- Xây dựng và deploy Shiny app:
-  - **LAB5 – R Shiny Analytics & End-to-End Validation**  
-- Các mở rộng (extra exercises):
-  - Thêm tab, thêm biểu đồ, tính thêm các loại aggregate phức tạp…

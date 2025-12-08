@@ -1,12 +1,6 @@
 ---
-title: "5.1. Objectives & Scope"
+title: "Objectives & Scope"
 weight: 51
----
-
-# Objectives & Scope
-
-Phần này mô tả **mục tiêu, phạm vi và những gì bạn sẽ học được** trong workshop xây dựng một nền tảng clickstream analytics theo kiểu batch cho một website thương mại điện tử (bán sản phẩm máy tính) trên môi trường **SBW_Project** của bạn.
-
 ---
 
 ### Bối cảnh kinh doanh

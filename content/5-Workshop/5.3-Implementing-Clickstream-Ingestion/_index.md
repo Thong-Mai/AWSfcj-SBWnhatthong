@@ -1,14 +1,6 @@
 ---
-title: "5.3. Implementing Clickstream Ingestion"
+title: "Implementing Clickstream Ingestion"
 weight: 53
----
-
-# Implementing Clickstream Ingestion
-
-This section explains how clickstream events are captured in the browser, sent to AWS, and stored as raw JSON in S3.
-
-> Hands-on details for this section are in **LAB2 – S3, Lambda Ingest & API Gateway** and partly **LAB4 – Frontend (Amplify) & Clickstream SDK**.
-
 ---
 
 ## 5.3.1 Ingestion Flow Overview
@@ -130,4 +122,3 @@ To validate ingestion:
    - API Gateway access logs  
    - Lambda function logs  
 
-If all looks good, the **ingestion layer is ready** for ETL in section 5.4 and LAB3.

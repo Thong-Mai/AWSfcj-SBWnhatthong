@@ -1,14 +1,6 @@
 ---
-title: "5.5. Visualizing Analytics with Shiny Dashboards"
+title: "Visualizing Analytics with Shiny Dashboards"
 weight: 55
----
-
-# Visualizing Analytics with Shiny Dashboards
-
-This section explains how the **R Shiny Server** on `SBW_EC2_ShinyDWH` turns warehouse tables into interactive dashboards, and how to access it securely via **SSM port forwarding**.
-
-> Hands-on details are in **LAB5 – R Shiny Analytics & End-to-End Validation**.
-
 ---
 
 ## 5.5.1 R Shiny on the Data Warehouse EC2
@@ -101,13 +93,3 @@ A typical validation sequence:
 
 5. **Refresh the Shiny dashboard**:
    - Confirm charts and numbers reflect the new interactions  
-
-If all five steps succeed, your clickstream analytics platform is **fully operational**.
-
----
-
-## 5.5.5 Hands-on Mapping (to LABs)
-
-- Building and deploying the Shiny app:
-  - **LAB5 – R Shiny Analytics & End-to-End Validation**  
-- Optional: adding new charts, additional tabs, or more complex aggregates can be treated as **extra exercises** after the main lab is complete.

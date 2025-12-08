@@ -1,14 +1,6 @@
 ---
-title: "5.3. Implementing Clickstream Ingestion"
+title: "Implementing Clickstream Ingestion"
 weight: 53
----
-
-# Implementing Clickstream Ingestion
-
-Phần này giải thích cách các sự kiện clickstream được capture trên browser, gửi lên AWS và lưu dưới dạng JSON thô trong S3.
-
-> Chi tiết thao tác từng bước nằm trong **LAB2 – S3, Lambda Ingest & API Gateway** và một phần **LAB4 – Frontend (Amplify) & Clickstream SDK**.
-
 ---
 
 ## 5.3.1 Tổng quan luồng Ingestion
@@ -66,7 +58,7 @@ Execution role cần có:
   - `arn:aws:s3:::clickstream-s3-ingest/events/*`  
 - Quyền CloudWatch Logs để ghi log.
 
-Function này **không** cần quyền đọc (read) S3.
+Function này **không** cần quyền đọc S3.
 
 ---
 
@@ -130,4 +122,3 @@ Payload này về sau sẽ được ETL chuyển thành một dòng dữ liệu 
    - Access logs của API Gateway  
    - Logs của Lambda function  
 
-Nếu mọi thứ OK, lớp **ingestion** đã sẵn sàng cho ETL ở phần 5.4 và LAB3.

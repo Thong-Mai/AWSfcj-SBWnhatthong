@@ -1,12 +1,6 @@
 ---
-title: "5.2. Architecture Walkthrough"
+title: "Architecture Walkthrough"
 weight: 52
----
-
-# Architecture Walkthrough
-
-Phần này đi qua các thành phần chính trong kiến trúc và mapping chúng với các resource trong **SBW_Project** của bạn.
-
 ---
 
 ## 5.2.1 Miền User-Facing
@@ -178,7 +172,7 @@ Nhờ đó **SSM Session Manager** có thể hoạt động hoàn toàn trong m�
 
 ---
 
-## 5.2.5 Mapping sang các LAB
+## 5.2.5 Mapping
 
 - **VPC + EC2** → xem **LAB1 – Networking & EC2**  
 - **S3 + Lambda Ingest + API Gateway** → xem **LAB2 – S3, Lambda Ingest & API Gateway**  

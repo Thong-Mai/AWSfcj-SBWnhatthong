@@ -1,15 +1,9 @@
 ---
-title: "5.6. Summary & Clean up"
+title: "Summary & Clean up"
 weight: 56
 ---
 
-# Summary & Clean up
-
-This final section summarizes what you have built and provides guidance on cleaning up AWS resources to avoid unexpected costs.
-
----
-
-## 5.6.1 What You Built
+## 5.6.1 Summary
 
 By completing the workshop and the LAB0–LAB5 exercises, you assembled a full **Clickstream Analytics Platform**:
 
@@ -34,7 +28,7 @@ Altogether, this shows how to design a **secure, cost-aware, batch-based analyti
 
 ---
 
-## 5.6.2 Key Takeaways
+## 5.6.2 Main content
 
 - **Separation of concerns**:
   - OLTP vs Analytics on separate EC2 instances and in different logical domains.  
@@ -52,8 +46,6 @@ Altogether, this shows how to design a **secure, cost-aware, batch-based analyti
 ---
 
 ## 5.6.3 Clean Up Resources
-
-If you used a personal AWS account or a shared sandbox, it’s important to **clean up**:
 
 1. **Amplify & CloudFront**
    - Remove the Amplify app (`ClickSteam.NextJS`).  
@@ -84,22 +76,3 @@ If you used a personal AWS account or a shared sandbox, it’s important to **cl
    - Delete route tables, subnets, Internet Gateway.  
    - Finally, delete `SBW_Project_VPC` if no longer needed.
 
-7. **RDS / Other Databases (if any)**
-   - This workshop uses PostgreSQL on EC2, but if you created extra DB instances, delete them too.
-
----
-
-## 5.6.4 Next Steps & Extensions
-
-If you want to continue beyond the workshop:
-
-- Replace EC2-based DW with **Amazon Redshift Serverless** or another managed DW.  
-- Introduce **real-time ingestion** via Amazon Kinesis + Lambda.  
-- Build **sessionization** logic, user segmentation, or attribution models in the ETL layer.  
-- Harden the architecture:
-  - Migrate OLTP to **Amazon RDS** in private subnets.  
-  - Introduce a backend/API layer between Amplify and the database.  
-  - Add CloudWatch metrics & alarms for:
-    - Lambda failures,  
-    - ETL latency,  
-    - Unusual drops/spikes in event volume.  

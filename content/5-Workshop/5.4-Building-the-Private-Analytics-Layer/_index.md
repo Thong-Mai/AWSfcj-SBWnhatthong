@@ -1,14 +1,6 @@
 ---
-title: "5.4. Building the Private Analytics Layer"
+title: "Building the Private Analytics Layer"
 weight: 54
----
-
-# Building the Private Analytics Layer
-
-This section focuses on everything **inside the VPC**: the private subnets, VPC endpoints, ETL Lambda, and the PostgreSQL Data Warehouse with R Shiny.
-
-> Hands-on details for this section are mainly in **LAB1 – Networking & EC2** and **LAB3 – EventBridge & Lambda ETL**.
-
 ---
 
 ## 5.4.1 VPC, Subnets, and Route Tables

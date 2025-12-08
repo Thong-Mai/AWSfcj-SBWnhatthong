@@ -1,15 +1,9 @@
 ---
-title: "5.6. Summary & Clean up"
+title: "Summary & Clean up"
 weight: 56
 ---
 
-# Summary & Clean up
-
-Phần cuối cùng này tóm tắt những gì bạn đã xây dựng và hướng dẫn cách **dọn dẹp resource AWS** để tránh phát sinh chi phí ngoài ý muốn.
-
----
-
-## 5.6.1 Bạn đã xây dựng được những gì?
+## 5.6.1 Tóm tắt
 
 Sau khi hoàn thành workshop và các bài LAB0–LAB5, bạn đã dựng được một **Clickstream Analytics Platform** hoàn chỉnh:
 
@@ -34,7 +28,7 @@ Tổng thể, kiến trúc này cho thấy cách thiết kế một **batch-base
 
 ---
 
-## 5.6.2 Các điểm chính cần ghi nhớ
+## 5.6.2 Nội dung chính 
 
 - **Separation of concerns**:
   - OLTP và Analytics tách trên 2 EC2 khác nhau, thuộc các domain logic khác nhau.  
@@ -52,8 +46,6 @@ Tổng thể, kiến trúc này cho thấy cách thiết kế một **batch-base
 ---
 
 ## 5.6.3 Dọn dẹp Resource
-
-Nếu bạn dùng AWS account cá nhân hoặc sandbox chung, rất quan trọng phải **clean up** sau khi lab xong:
 
 1. **Amplify & CloudFront**
    - Xóa Amplify app (`ClickSteam.NextJS`).  
@@ -84,24 +76,3 @@ Nếu bạn dùng AWS account cá nhân hoặc sandbox chung, rất quan trọng
    - Xóa route tables, subnets, Internet Gateway.  
    - Cuối cùng, xóa `SBW_Project_VPC` nếu không còn dùng.
 
-7. **RDS / Database khác (nếu có)**
-   - Workshop này dùng PostgreSQL trên EC2; nếu bạn tạo thêm RDS hoặc DB khác để thử nghiệm, nhớ xóa luôn.
-
----
-
-## 5.6.4 Bước tiếp theo & Hướng mở rộng
-
-Nếu muốn tiếp tục phát triển nền tảng:
-
-- Thay DW trên EC2 bằng **Amazon Redshift Serverless** hoặc DW managed khác.  
-- Thêm luồng **real-time ingestion** với Amazon Kinesis + Lambda.  
-- Xây logic **sessionization**, segmentation người dùng, attribution model trong ETL.  
-- Hardening kiến trúc:
-  - Di chuyển OLTP lên **Amazon RDS** trong private subnets.  
-  - Thêm backend/API layer giữa Amplify và database.  
-  - Thiết lập CloudWatch metrics & alarms cho:
-    - Lỗi Lambda,  
-    - Độ trễ ETL,  
-    - Mức giảm/tăng bất thường trong số lượng events.  
-
-Chúc mừng – bạn đã hoàn thành một “mini data platform” khá hoàn chỉnh trên AWS, với kiến trúc, bảo mật và chi phí đủ chuẩn để làm nền tảng cho các bài học nâng cao sau này. 🎉
