@@ -35,8 +35,6 @@ To achieve this, the platform:
 
 ### Learning Objectives
 
-After completing sections **5.1–5.6** and the associated LABs (LAB0–LAB5), you should be able to:
-
 #### Architectural understanding
 
 - Explain the overall architecture of a **batch-based clickstream analytics platform** using:

@@ -23,7 +23,7 @@ Phần này đi qua các thành phần chính trong kiến trúc và mapping ch�
   - Dựa trên Cognito token để biết user đã đăng nhập hay chưa  
   - Gửi clickstream events tới `clickstream-http-api`  
 
-### Cơ sở dữ liệu OLTP – `SBW_EC2_WebDB` (Public Subnet)
+### Cơ sở dữ liệu OLTP – `SBW_EC2_WebDB` 
 
 - EC2 instance: `SBW_EC2_WebDB` trong public subnet `SBW_Project-subnet-public1-ap-southeast-1a`  
 - PostgreSQL lắng nghe trên port `5432`  

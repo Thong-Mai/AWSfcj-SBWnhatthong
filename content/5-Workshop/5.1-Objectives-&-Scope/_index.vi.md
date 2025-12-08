@@ -35,8 +35,6 @@ Business muốn:
 
 ### Mục tiêu học tập
 
-Sau khi hoàn thành các phần **5.1–5.6** và các LAB tương ứng (LAB0–LAB5), bạn sẽ có khả năng:
-
 #### Hiểu kiến trúc
 
 - Giải thích được kiến trúc tổng thể của một **batch-based clickstream analytics platform** sử dụng:
@@ -99,7 +97,7 @@ Workshop giả định bạn đọc hiểu được code snippet cơ bản, như
 
 ---
 
-### Ngoài phạm vi (Out-of-Scope)
+### Ngoài phạm vi
 
 Để workshop không quá dài, chúng ta **không** đi sâu vào:
 

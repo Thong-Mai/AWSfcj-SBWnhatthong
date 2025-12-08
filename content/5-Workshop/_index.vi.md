@@ -82,23 +82,6 @@ Nền tảng được thiết kế với các tiêu chí:
     - `portNumber = 3838`  
   - Shiny URL khi truy cập từ local: `http://localhost:3838/sbw_dashboard`  
 
-#### Yêu cầu trước khi bắt đầu
-
-Trước khi vào chi tiết các phần (5.1–5.6), bạn nên:
-
-- Nắm các kiến thức cơ bản về AWS: EC2, S3, Lambda, API Gateway, VPC, IAM, EventBridge  
-- Biết cơ bản về SQL và quản trị PostgreSQL  
-- Hiểu các khái niệm web cơ bản (HTTP, JSON, REST APIs)  
-- Có AWS account với quyền tạo các tài nguyên:
-  - VPC, subnets, route tables, VPC endpoints  
-  - S3 buckets  
-  - Lambda functions + IAM roles  
-  - API Gateway HTTP APIs  
-  - EventBridge rules  
-  - EC2 instances  
-
-> Lưu ý: Trong phiên bản workshop này, chúng ta sẽ **tự tay tạo** hầu hết resource bằng AWS Console (kiểu “hướng dẫn làm lab”). Trong production, bạn nên dùng **Infrastructure-as-Code** (Terraform / CloudFormation).
-
 #### Bản đồ nội dung
 
 1. **[5.1. Objectives & Scope](5.1-objectives--scope/)**  

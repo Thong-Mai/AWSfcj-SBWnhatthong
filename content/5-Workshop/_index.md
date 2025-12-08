@@ -82,23 +82,6 @@ The platform is engineered with:
     - `portNumber = 3838`  
   - Shiny URL from local: `http://localhost:3838/sbw_dashboard`  
 
-#### Prerequisites
-
-Before starting the detailed sections (5.1–5.6), you should:
-
-- Be familiar with basic AWS services: EC2, S3, Lambda, API Gateway, VPC, IAM, EventBridge  
-- Know basic SQL and PostgreSQL administration  
-- Understand web fundamentals (HTTP, JSON, REST APIs)  
-- Have an AWS account with permissions to create:
-  - VPC, subnets, route tables, VPC endpoints  
-  - S3 buckets  
-  - Lambda functions + IAM roles  
-  - API Gateway HTTP APIs  
-  - EventBridge rules  
-  - EC2 instances  
-
-> Note: In this version of the workshop, we will **actively create** most of the resources by hand (console-based lab). In production you would typically provision them via **Infrastructure-as-Code** (Terraform / CloudFormation).
-
 #### Content Map
 
 1. **[5.1. Objectives & Scope](5.1-objectives--scope/)**  
