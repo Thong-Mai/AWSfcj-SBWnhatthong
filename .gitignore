@@ -1,0 +1,8 @@
+.vercel/
+.hugo_build.lock
+node_modules/
+resources/_gen/
+public/
+.vercel
+.obsidian/
+profile
