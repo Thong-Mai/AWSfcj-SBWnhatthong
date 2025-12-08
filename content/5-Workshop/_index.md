@@ -7,7 +7,7 @@ pre: "<b>5. </b>"
 ---
 
 # Workshop  
-# Clickstream Analytics Platform for E-Commerce
+# Batch-Based Clickstream Analytics Platform
 
 ![Architecture](/images/architecture.png)
 
