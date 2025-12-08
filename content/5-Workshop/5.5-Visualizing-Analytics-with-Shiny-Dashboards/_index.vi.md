@@ -1,5 +1,5 @@
 ---
-title: "Visualizing Analytics with Shiny Dashboards"
+title: "Trực quan hóa phân tích với các bảng điều khiển Shiny"
 weight: 55
 chapter: false
 pre: " <b> 5.5. </b> "
@@ -17,6 +17,7 @@ pre: " <b> 5.5. </b> "
 
 ## 5.5.2 Cài các package hệ thống (system libs)
 
+Lưu ý cần bật NAT Gateway trước khi tải các buckets hệ thống.
 Đăng nhập EC2 bằng **SSM Session Manager** hoặc SSH (tạm thời, nếu có), sau đó chạy:
 
 ```bash

@@ -1,5 +1,5 @@
 ---
-title: "Objectives & Scope"
+title: "Mục tiêu & Phạm vi"
 weight: 51
 chapter: false
 pre: " <b> 5.1. </b> "

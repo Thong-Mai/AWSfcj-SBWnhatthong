@@ -5,93 +5,250 @@ chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-## 5.5.1 R Shiny on the Data Warehouse EC2
+## 5.5.1 Environment information
 
-R Shiny is installed on `SBW_EC2_ShinyDWH` and runs alongside PostgreSQL:
-
-- Listens on port `3838`  
-- Serves the `sbw_dashboard` app  
-- Connects to `clickstream_dw` via `localhost:5432`  
-
-Typical stack:
-
-- R + packages:
-  - `shiny`, `shinydashboard`  
-  - `DBI`, `RPostgres`  
-  - `dplyr`, `ggplot2`, etc.  
-
-The Shiny app is deployed under:
-
-- `/srv/shiny-server/sbw_dashboard/`  
-  - `app.R` or `ui.R` + `server.R`  
+- OS: **Ubuntu 22.04 (Jammy)** – EC2 in a private subnet  
+- PostgreSQL: **v18** (installed from the `apt.postgresql.org` repo)  
+- Shiny Server: `.deb` binary from RStudio (Posit)  
+- User running Shiny: `shiny`  
+- App path: `/srv/shiny-server/sbw_dashboard/app.R`
 
 ---
 
-## 5.5.2 Dashboard Content
+## 5.5.2 Install system packages (system libs)
 
-The dashboard can be structured into multiple tabs, for example:
+Note: you need to enable the NAT Gateway before downloading system packages.  
+Log in to EC2 using **SSM Session Manager** or SSH (temporarily, if available), then run:
 
-1. **Overview**
-   - Total events over selected time range  
-   - Unique users, sessions  
-   - Top event types  
+```bash
+# 1) Update package list
+sudo apt-get update
 
-2. **Product Analytics**
-   - Top products by views (`event_name = 'product_view'`)  
-   - Conversion to add-to-cart / checkout by product  
+# 2) Install R (if not installed)
+sudo apt-get install -y r-base
 
-3. **Funnel Analysis**
-   - Steps:
-     - `page_view` → `product_view` → `add_to_cart` → `checkout`  
-   - Drop-off rate at each step  
+# 3) Install Postgres client & dev headers (for RPostgres)
+#    If your DB is PG 18 then use postgresql-server-dev-18
+#    (if your version is different, change 18 -> 14, 15, ...)
+sudo apt-get install -y postgresql-client-18 postgresql-server-dev-18
 
-4. **Time-based Trends**
-   - Events per hour / per day  
-   - Peak user activity windows  
+# 4) Install libpq + libssl (required to build RPostgres)
+sudo apt-get install -y libpq-dev libssl-dev
 
-All of these visuals are powered by simple queries to `clickstream_dw.public.clickstream_events` and any aggregate tables you decide to build.
+# 5) (If Shiny Server is not installed yet)
+#    Depending on how you install it, just remember:
+#    - shiny-server service: /etc/systemd/system/shiny-server.service
+#    - app folder: /srv/shiny-server/
+#    - user: shiny
+```
 
----
+Check that `libpq` and dev headers are present:
 
-## 5.5.3 Secure Access via SSM Session Manager
+```bash
+dpkg -l | grep -E 'libpq-dev|postgresql-server-dev' || echo "MISSING_LIBS"
+ls -l /usr/include/postgresql/libpq-fe.h || echo "NO_LIBPQ_HEADER"
+```
 
-Because `SBW_EC2_ShinyDWH` has no public IP and no open SSH port, access happens via **AWS Systems Manager Session Manager**.
-
-### Steps
-
-1. Open **Session Manager** in the AWS console.  
-2. Start a session to instance `SBW_EC2_ShinyDWH`.  
-3. Set up **port forwarding**:
-   - `localPort = 3838`  
-   - `portNumber = 3838`  
-
-4. On your local machine, open:
-   - `http://localhost:3838/sbw_dashboard`  
-
-You can now browse the dashboard as if it were running locally, while it actually lives inside a private subnet.
+If you **do not see any error** → OK.
 
 ---
 
-## 5.5.4 Verifying the End-to-End Data Flow
+## 5.5.3 Configure R library folder for user `shiny`
 
-A typical validation sequence:
+To let Shiny Server load R packages, we install the packages under user `shiny` and use the folder:
 
-1. **Generate behavior**:
-   - Open the Amplify URL: `https://main.d2q6im0b1720uc.amplifyapp.com/`  
-   - Navigate across product lists and product detail pages  
-   - Add items to the cart, proceed to checkout  
+- `/home/shiny/R/x86_64-pc-linux-gnu-library/4.1`
 
-2. **Check S3**:
-   - Inspect `clickstream-s3-ingest/events/YYYY/MM/DD/`  
-   - Confirm new `event-<uuid>.json` files are present  
+Run:
 
-3. **Run or wait for ETL**:
-   - Trigger `SBW_Lamda_ETL` manually or wait for `SBW_ETL_HOURLY_RULE`  
-   - Check CloudWatch logs to confirm rows were loaded  
+```bash
+sudo -u shiny R --vanilla <<'EOF'
+# Create library directory for user shiny if it does not exist
+dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
 
-4. **Query DW**:
-   - From the EC2 or via a DB client:
-     - `SELECT * FROM public.clickstream_events ORDER BY event_timestamp DESC LIMIT 50;`  
+# Put R_LIBS_USER at the top of .libPaths()
+.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
+cat("LIBPATHS:
+"); print(.libPaths())
 
-5. **Refresh the Shiny dashboard**:
-   - Confirm charts and numbers reflect the new interactions  
+q("no")
+EOF
+```
+
+You should see `LIBPATHS` where line 1 is `/home/shiny/R/x86_64-pc-linux-gnu-library/4.1`.
+
+---
+
+## 5.5.4 Install required R packages
+
+Packages needed for the dashboard:
+
+- `shiny`
+- `DBI`
+- `RPostgres`
+- `dplyr`
+- `ggplot2`
+- `lubridate`
+- `pool`
+
+Install all of them under user `shiny`:
+
+```bash
+sudo -u shiny R --vanilla <<'EOF'
+dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
+.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
+cat("LIBPATHS:
+"); print(.libPaths())
+
+install.packages(
+  c("shiny", "DBI", "RPostgres", "dplyr", "ggplot2", "lubridate", "pool"),
+  repos = "https://cloud.r-project.org"
+)
+
+q("no")
+EOF
+```
+
+💡 **If you hit errors related to `libpq-fe.h` or `libpq`:**
+
+1. Re-check that `libpq-dev`, `postgresql-server-dev-XX`, `libssl-dev` are installed.  
+2. Re-run `install.packages("RPostgres", ...)` after installing all required libs.  
+
+Verify that packages can be loaded:
+
+```bash
+sudo -u shiny R --vanilla <<'EOF'
+.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
+cat("LIBPATHS:
+"); print(.libPaths())
+
+library(shiny)
+library(DBI)
+library(RPostgres)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(pool)
+
+cat("All packages loaded OK
+")
+q("no")
+EOF
+```
+
+If there is **no error** → the R environment is OK.
+
+---
+
+## 5.5.5 Deploying the Shiny app
+
+### 5.5.5.1 Create the app folder and copy code
+
+```bash
+sudo mkdir -p /srv/shiny-server/sbw_dashboard
+sudo chown -R shiny:shiny /srv/shiny-server/sbw_dashboard
+```
+
+Create (or replace) the app file:
+
+```bash
+sudo nano /srv/shiny-server/sbw_dashboard/app.R
+# PASTE THE FULL app.R CODE (the full version you are using)
+# Ctrl+O, Enter, Ctrl+X to save
+```
+
+Make sure permissions are correct:
+
+```bash
+sudo chown shiny:shiny /srv/shiny-server/sbw_dashboard/app.R
+sudo chmod 644 /srv/shiny-server/sbw_dashboard/app.R
+```
+
+### 5.5.5.2 Restart Shiny Server
+
+```bash
+sudo systemctl restart shiny-server
+sudo systemctl status shiny-server
+```
+
+---
+
+## 5.5.6 Check the app from EC2 (local)
+
+From an SSM session on EC2 (terminal):
+
+```bash
+# Check Shiny welcome page
+curl -m 5  -sS -o /dev/null -w "WELCOME HTTP %{http_code}
+"   http://127.0.0.1:3838/
+
+# Check SBW dashboard app
+curl -m 10 -sS -o /dev/null -w "DASHBOARD HTTP %{http_code}
+"   http://127.0.0.1:3838/sbw_dashboard/
+```
+
+If it returns `DASHBOARD HTTP 200` → the app is running OK.
+
+If it returns `500`:
+
+```bash
+LATEST=$(ls -1t /var/log/shiny-server/sbw_dashboard-shiny-*.log | head -n 1)
+echo "LATEST=$LATEST"
+sudo tail -n 100 "$LATEST"
+```
+
+Check the error log for debugging.
+
+---
+
+## 5.5.7 Access the dashboard from your local machine
+
+Because the EC2 instance is in a **private subnet**, you use **SSM port forwarding**:
+
+```bash
+# Example using AWS CLI v2 on your local machine:
+aws ssm start-session   --target <INSTANCE_ID_PRIVATE>   --document-name AWS-StartPortForwardingSessionToRemoteHost   --parameters '{"host":["127.0.0.1"],"portNumber":["3838"],"localPortNumber":["3838"]}'
+```
+
+After that, open your browser on your local machine at:
+
+```text
+http://127.0.0.1:3838/sbw_dashboard/
+```
+
+The dashboard will show, for example:
+
+- **KPI cards** (total events, users, sessions, …)  
+- Charts for **events over time**, **event mix**, **events by login state**  
+- **Products & Raw sample** tab (pagination, newest first, auto refresh every 10s – depending on your app code)
+
+---
+
+## 5.5.8 Quick summary of important commands
+
+```bash
+# Install system libs
+sudo apt-get update
+sudo apt-get install -y r-base postgresql-client-18 postgresql-server-dev-18 libpq-dev libssl-dev
+
+# Install R packages for user shiny
+sudo -u shiny R --vanilla <<'EOF'
+dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)
+.libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
+install.packages(
+  c("shiny", "DBI", "RPostgres", "dplyr", "ggplot2", "lubridate", "pool"),
+  repos = "https://cloud.r-project.org"
+)
+q("no")
+EOF
+
+# Deploy app
+sudo mkdir -p /srv/shiny-server/sbw_dashboard
+sudo nano /srv/shiny-server/sbw_dashboard/app.R   # paste code
+sudo chown -R shiny:shiny /srv/shiny-server/sbw_dashboard
+sudo systemctl restart shiny-server
+
+# Check dashboard
+curl -m 10 -sS -o /dev/null -w "DASHBOARD HTTP %{http_code}
+"   http://127.0.0.1:3838/sbw_dashboard/
+```

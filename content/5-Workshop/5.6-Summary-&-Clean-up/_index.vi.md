@@ -1,5 +1,5 @@
 ---
-title: "Summary & Clean up"
+title: "Tổng kết & Dọn dẹp"
 weight: 56
 chapter: false
 pre: " <b> 5.6. </b> "

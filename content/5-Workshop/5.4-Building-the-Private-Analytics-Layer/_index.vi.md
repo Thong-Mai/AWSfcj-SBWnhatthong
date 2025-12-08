@@ -1,5 +1,5 @@
 ---
-title: "Building the Private Analytics Layer"
+title: "Xây dựng lớp Private Analytics"
 weight: 54
 chapter: false
 pre: " <b> 5.4. </b> "
