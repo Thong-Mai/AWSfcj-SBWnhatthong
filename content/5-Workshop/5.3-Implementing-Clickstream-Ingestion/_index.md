@@ -35,9 +35,13 @@ Two buckets are relevant:
 
 Partitioning by date makes batch ETL easier (e.g., process “today’s folder” or “last N hours”).
 
+![S3 RAW bucket events](/images/aws-s3-clickstream-ingest-events.png)
+
 ---
 
 ## 5.3.3 Lambda Ingest Design – `clickstream-lambda-ingest`
+
+![Lambda Ingest](/images/aws-lambda-clickstream-ingest-config.png)
 
 ### Responsibilities
 
@@ -68,6 +72,8 @@ The HTTP API provides a public HTTPS endpoint for ingestion:
 
 - Route:
   - `POST /clickstream` → Lambda `clickstream-lambda-ingest`  
+
+![Route POST /clickstream trên API Gateway](/images/aws-apigw-clickstream-routes.png)
 
 Recommended options:
 

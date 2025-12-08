@@ -28,6 +28,8 @@ weight: 54
 
 ## 5.4.2 VPC Endpoints (S3 & SSM)
 
+![Các VPC Endpoint cho S3 & SSM](/images/aws-vpc-endpoints-s3-ssm.png)
+
 ### S3 Gateway VPC Endpoint
 
 - Cho phép **truy cập S3 trong private network** cho:
@@ -113,6 +115,8 @@ ETL Lambda là nơi xử lý batch chính.
 ---
 
 ## 5.4.5 Lên lịch bằng EventBridge – `SBW_ETL_HOURLY_RULE`
+
+![EventBridge rule](/images/aws-eventbridge-sbw-etl-hourly-rule.png)
 
 EventBridge giúp nền tảng hoạt động theo kiểu **batch**:
 

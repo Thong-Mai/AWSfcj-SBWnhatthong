@@ -28,6 +28,8 @@ This makes the analytics layer **fully private** with no direct Internet access.
 
 ## 5.4.2 VPC Endpoints (S3 & SSM)
 
+![VPC Endpoint for S3 & SSM](/images/aws-vpc-endpoints-s3-ssm.png)
+
 ### S3 Gateway VPC Endpoint
 
 - Allows **private S3 access** for:
@@ -113,6 +115,8 @@ ETL Lambda is where batch processing happens.
 ---
 
 ## 5.4.5 EventBridge Scheduling – `SBW_ETL_HOURLY_RULE`
+
+![EventBridge rule](/images/aws-eventbridge-sbw-etl-hourly-rule.png)
 
 EventBridge drives the **batch nature** of the platform:
 

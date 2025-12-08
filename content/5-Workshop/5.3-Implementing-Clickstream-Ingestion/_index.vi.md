@@ -35,9 +35,13 @@ Có 2 bucket liên quan:
 
 Partition theo ngày giúp ETL batch đơn giản hơn (ví dụ xử lý “folder hôm nay” hoặc “N giờ gần nhất”).
 
+![S3 RAW bucket events](/images/aws-s3-clickstream-ingest-events.png)
+
 ---
 
 ## 5.3.3 Thiết kế Lambda Ingest – `clickstream-lambda-ingest`
+
+![Lambda Ingest](/images/aws-lambda-clickstream-ingest-config.png)
 
 ### Nhiệm vụ
 
@@ -68,6 +72,8 @@ HTTP API cung cấp endpoint HTTPS public cho ingestion:
 
 - Route:
   - `POST /clickstream` → Lambda `clickstream-lambda-ingest`  
+
+![Route POST /clickstream trên API Gateway](/images/aws-apigw-clickstream-routes.png)
 
 Khuyến nghị cấu hình:
 
