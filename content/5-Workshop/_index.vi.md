@@ -6,10 +6,10 @@ chapter: false
 pre: "<b>5. </b>"
 ---
 
-# Workshop  
 # Batch-Based Clickstream Analytics Platform
 
 ![Architecture](/images/architecture.png)
+<p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
 
 #### Tổng quan
 
@@ -17,22 +17,22 @@ Workshop này triển khai một **nền tảng phân tích Clickstream theo ki�
 
 Hệ thống thu thập các sự kiện (events) clickstream từ frontend, lưu dữ liệu JSON thô trong **Amazon S3**, xử lý events theo lịch ETL định kỳ (**AWS Lambda + EventBridge**), và nạp dữ liệu phân tích vào một **PostgreSQL Data Warehouse trên EC2** nằm trong private subnet.
 
-Các dashboard phân tích tương tác được xây dựng bằng **R Shiny**, chạy trên cùng EC2 với Data Warehouse, và được truy cập thông qua **AWS Systems Manager Session Manager** (không cần SSH).
+Các dashboard phân tích được xây dựng bằng **R Shiny**, chạy trên cùng EC2 với Data Warehouse, và được truy cập thông qua **AWS Systems Manager Session Manager**.
 
 Nền tảng được thiết kế với các tiêu chí:
 
 - Tách biệt rõ ràng giữa workload **OLTP và Analytics**  
 - Backend analytics chỉ chạy trong private subnet (**không có truy cập public vào DW**)  
 - Sử dụng các thành phần serverless của AWS để tối ưu chi phí và khả năng mở rộng  
-- Giảm tối đa số lượng “moving parts” để tăng độ ổn định và đơn giản  
-- Không cần SSH: quản trị qua **SSM Session Manager** vào EC2 chạy DW / Shiny  
+- Quản trị qua **SSM Session Manager** vào EC2 chạy DW / Shiny  
+- Có thể chạy web Shiny bằng **localhost:3838**
 
 #### Các thành phần kiến trúc chính
 
 **Miền Frontend & OLTP**
 
 - Ứng dụng Next.js: **`ClickSteam.NextJS`** được host bằng **AWS Amplify Hosting**  
-- **Amazon CloudFront** làm CDN toàn cầu  
+- **Amazon CloudFront** được tích hợp trong **Amplify** giúp tăng tốc độ truyền tải file tĩnh 
 - **Amazon Cognito** User Pool để xác thực người dùng  
 - PostgreSQL OLTP chạy trên EC2: **`SBW_EC2_WebDB`** (public subnet)  
   - Database: `clickstream_web` (schema `public`)  
@@ -51,14 +51,14 @@ Nền tảng được thiết kế với các tiêu chí:
 
 **Miền Analytics & Data Warehouse**
 
-- **EC2 private cho DW + Shiny**: `SBW_EC2_ShinyDWH` (private subnet `10.0.128.0/20`)  
-  - Database DW: `clickstream_dw` (schema `public`)  
+- **EC2 private cho DWH + Shiny**: `SBW_EC2_ShinyDWH` (private subnet `10.0.128.0/20`)  
+  - Database DW: `clickstream_dw` 
   - Bảng chính: `clickstream_events` với các field:
     - `event_id, event_timestamp, event_name`  
     - `user_id, user_login_state, identity_source, client_id, session_id, is_first_visit`  
     - `context_product_id, context_product_name, context_product_category, context_product_brand`  
     - `context_product_price, context_product_discount_price, context_product_url_path`  
-  - R Shiny Server chạy trên port `3838`, app path `/sbw_dashboard`  
+  - R Shiny Server chạy trên port `3838`, web path `/sbw_dashboard`  
 
 - **Lambda ETL**: `SBW_Lamda_ETL` (chạy trong VPC)  
   - Đọc JSON thô từ `clickstream-s3-ingest`  

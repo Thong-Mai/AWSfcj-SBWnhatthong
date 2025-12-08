@@ -1,6 +1,8 @@
 ---
 title: "Objectives & Scope"
 weight: 51
+chapter: false
+pre: " <b> 5.1. </b> "
 ---
 
 ### Bối cảnh kinh doanh
@@ -16,14 +18,11 @@ Business muốn:
 - Xác định:
   - Sản phẩm top (bán chạy / được xem nhiều)  
   - Khung giờ hoạt động cao điểm (theo giờ, theo ngày)  
-- **Tách riêng analytics** khỏi production database:
-  - Không chạy các truy vấn báo cáo nặng trên OLTP  
-  - Không lộ các thành phần analytics nội bộ ra public  
-
+- Giúp sử dụng chiến lược marketing phù hợp nhất để tăng doanh thu, tiết kiệm chi phí
+  
 Để đạt được điều đó, nền tảng:
 
-- Tách **OLTP** (`SBW_EC2_WebDB`, DB `clickstream_web`) khỏi **Analytics** (`SBW_EC2_ShinyDWH`, DB `clickstream_dw`)  
-- Thu thập clickstream events vào một **Data Warehouse chuyên biệt**, chỉ expose các view/bảng tổng hợp cho Shiny dashboards.
+- Thu thập bộ dữ liệu hành vi người dùng bằng clickstream, sau đó đưa ra thống kê và phân tích
 
 ---
 
@@ -42,8 +41,8 @@ Business muốn:
 #### Kỹ năng thực hành
 
 - Gửi clickstream events từ frontend vào API Gateway → Lambda Ingest → S3 Raw (`clickstream-s3-ingest`).  
-- Cấu hình **Gateway VPC Endpoint cho S3** và chỉnh route table private để các thành phần private truy cập S3 mà **không cần NAT Gateway**.  
-- Cấu hình và test một **VPC-enabled ETL Lambda** (`SBW_Lamda_ETL`) có khả năng:
+- Cấu hình **Gateway VPC Endpoint cho S3** và chỉnh route table private để các thành phần private truy cập S3.  
+- Cấu hình và test một **ETL Lambda** (`SBW_Lamda_ETL`) có khả năng:
   - Đọc file JSON thô từ `s3://clickstream-s3-ingest/events/YYYY/MM/DD/`  
   - Transform events thành các dòng dữ liệu cho bảng `clickstream_dw.public.clickstream_events`  
 - Kết nối vào DW (`SBW_EC2_ShinyDWH`) và chạy các câu truy vấn SQL mẫu:
@@ -57,9 +56,9 @@ Business muốn:
 
 #### Nhận thức về bảo mật và chi phí
 
-- Giải thích được tại sao thiết kế này **không dùng NAT Gateway**:
-  - Truy cập S3 qua **Gateway VPC Endpoint**  
-  - Truy cập SSM qua **Interface VPC Endpoints**  
+- Hiểu được tầm quan trọng của việc bảo mật dữ liệu hành vi người dùng bằng cách không cho EC2_ShinyDWH, Lamda_ETL bằng cách cho EC2_ShinyDWH, Lamda_ETL vào Private subnet. 
+  - Chỉ cho Lamda_ETL truy cập S3 qua **Gateway VPC Endpoint**  
+  - Chỉ cho admin đi vào EC2_ShinyDWH thông qua SSM bằng **Interface VPC Endpoints**  
 - Nhận biết các control bảo mật chính:
   - Phân tách public subnet và private subnet  
   - Security group giữa `sg_oltp_webDB`, `sg_Lambda_ETL`, `sg_analytics_ShinyDWH`  
@@ -87,13 +86,11 @@ Workshop tập trung vào 3 nhóm khả năng chính:
    - Hiển thị funnel, hiệu quả sản phẩm và trend theo thời gian  
    - Truy cập Shiny thông qua **SSM Session Manager port forwarding**  
 
-Workshop giả định bạn đọc hiểu được code snippet cơ bản, nhưng phần lớn resource sẽ được **tạo từng bước bằng AWS Console**.
-
 ---
 
 ### Ngoài phạm vi
 
-Để workshop không quá dài, chúng ta **không** đi sâu vào:
+Để workshop không quá phức tạp, chúng ta **không** đi sâu vào:
 
 - Real-time streaming (Kinesis, Kafka, MSK, …)  
 - Dịch vụ DW nâng cao (Amazon Redshift / Redshift Serverless)  
@@ -103,16 +100,6 @@ Workshop giả định bạn đọc hiểu được code snippet cơ bản, như
 
 Đây là những hướng mở rộng tự nhiên sau khi nền tảng batch-based clickstream đã được dựng xong.
 
----
-
-### Đối tượng phù hợp
-
-Workshop phù hợp với:
-
-- Sinh viên / kỹ sư có kiến thức AWS cơ bản, muốn xem **nhiều dịch vụ AWS kết nối với nhau**  
-- Developer quen với **JavaScript/TypeScript**, **SQL**, **Linux**  
-- Những người “data-minded” muốn một kiến trúc analytics **an toàn, tiết kiệm chi phí**, dựa trên:
-  - Một số ít EC2  
-  - Phần còn lại chủ yếu là serverless  
+ 
 
 

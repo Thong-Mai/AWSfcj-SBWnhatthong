@@ -1,11 +1,13 @@
 ---
 title: "Summary & Clean up"
 weight: 56
+chapter: false
+pre: " <b> 5.6. </b> "
 ---
 
 ## 5.6.1 Tóm tắt
 
-Sau khi hoàn thành workshop và các bài LAB0–LAB5, bạn đã dựng được một **Clickstream Analytics Platform** hoàn chỉnh:
+Sau khi hoàn thành bài Lab chúng ta đã dựng được một **Clickstream Analytics Platform** hoàn chỉnh:
 
 1. **Lớp User-Facing**
    - Ứng dụng Next.js (`ClickSteam.NextJS`) trên Amplify + CloudFront  
@@ -49,7 +51,7 @@ Tổng thể, kiến trúc này cho thấy cách thiết kế một **batch-base
 
 1. **Amplify & CloudFront**
    - Xóa Amplify app (`ClickSteam.NextJS`).  
-   - Thao tác này cũng xóa CloudFront distribution và S3 hosting bucket do Amplify tạo.
+   - Thao tác này cũng xóa CloudFront distribution.
 
 2. **API Gateway & Lambda**
    - Xóa `clickstream-http-api`.  

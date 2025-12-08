@@ -1,6 +1,8 @@
 ---
 title: "Objectives & Scope"
 weight: 51
+chapter: false
+pre: " <b> 5.1. </b> "
 ---
 
 ### Business Context
@@ -22,8 +24,6 @@ The business wants to:
 
 To achieve this, the platform:
 
-- Separates **OLTP** (`SBW_EC2_WebDB`, DB `clickstream_web`) from **Analytics** (`SBW_EC2_ShinyDWH`, DB `clickstream_dw`)  
-- Captures clickstream events in a **dedicated Data Warehouse** and only exposes aggregated views to Shiny dashboards.
 
 ---
 
@@ -42,8 +42,8 @@ To achieve this, the platform:
 #### Practical skills
 
 - Send clickstream events from the frontend to API Gateway → Lambda Ingest → S3 Raw (`clickstream-s3-ingest`).  
-- Configure a **Gateway VPC Endpoint for S3** and update private route tables so private components can reach S3 without a NAT Gateway.  
-- Configure and test a **VPC-enabled ETL Lambda** (`SBW_Lamda_ETL`) that:
+- Configure a **Gateway VPC Endpoint for S3** and update private route tables so private components can reach S3.  
+- Configure and test a **ETL Lambda** (`SBW_Lamda_ETL`) that:
   - Reads raw JSON files from `s3://clickstream-s3-ingest/events/YYYY/MM/DD/`  
   - Transforms events into rows for `clickstream_dw.public.clickstream_events`  
 - Connect to the DW (`SBW_EC2_ShinyDWH`) and run sample SQL queries:
@@ -87,8 +87,6 @@ This workshop focuses on three core capabilities:
    - Displaying funnels, product performance, and time-based trends  
    - Accessing Shiny through **SSM Session Manager port forwarding**  
 
-The workshop assumes that you are comfortable reading code snippets, but you will **build most resources step-by-step** using the AWS Management Console.
-
 ---
 
 ### Out-of-Scope Topics
@@ -103,15 +101,4 @@ To keep the lab feasible, we explicitly do **not** cover:
 
 These are natural future enhancements once the batch-based clickstream foundation is in place.
 
----
-
-### Target Audience
-
-This workshop is aimed at:
-
-- Students / engineers with basic AWS knowledge who want to see **multiple services working together**  
-- Developers comfortable with **JavaScript/TypeScript**, **SQL**, and **Linux**  
-- Data-minded builders who want a **secure, cost-conscious** analytics architecture based on:
-  - A small number of EC2 instances  
-  - Mostly serverless components around them  
 

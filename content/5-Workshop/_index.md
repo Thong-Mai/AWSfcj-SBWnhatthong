@@ -6,10 +6,10 @@ chapter: false
 pre: "<b>5. </b>"
 ---
 
-# Workshop  
 # Batch-Based Clickstream Analytics Platform
 
 ![Architecture](/images/architecture.png)
+<p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
 
 #### Overview
 
@@ -17,15 +17,15 @@ This workshop implements a **Batch-Based Clickstream Analytics Platform** for an
 
 The system collects clickstream events from the frontend, stores raw JSON data in **Amazon S3**, processes events via scheduled ETL (**AWS Lambda + EventBridge**), and loads analytical data into a dedicated **PostgreSQL Data Warehouse on EC2** inside a private subnet.
 
-Interactive analytics dashboards are built using **R Shiny**, running on the same EC2 instance as the Data Warehouse, and accessed via **AWS Systems Manager Session Manager** (zero SSH).
+Analytics dashboards are built using **R Shiny**, running on the same EC2 instance as the Data Warehouse, and accessed via **AWS Systems Manager Session Manager**.
 
 The platform is engineered with:
 
 - Clear separation between **OLTP vs Analytics** workloads  
 - Private-only analytical backend (**no public DW access**)  
 - Cost-efficient, scalable AWS serverless components  
-- Minimal moving parts for reliability and simplicity  
-- Zero-SSH admin access via **SSM Session Manager** into the private DW / Shiny EC2  
+- Zero-SSH admin access via **SSM Session Manager** into the private DW / Shiny EC2 
+- You can run the Shiny app locally at **localhost:3838**
 
 #### Key Architecture Components
 
@@ -51,14 +51,14 @@ The platform is engineered with:
 
 **Analytics & Data Warehouse Domain**
 
-- **Private EC2 for DW + Shiny**: `SBW_EC2_ShinyDWH` (private subnet `10.0.128.0/20`)  
-  - DWH DB: `clickstream_dw` (schema `public`)  
+- **Private EC2 for DWH + Shiny**: `SBW_EC2_ShinyDWH` (private subnet `10.0.128.0/20`)  
+  - DWH DB: `clickstream_dw` 
   - Main table: `clickstream_events` with fields:
     - `event_id, event_timestamp, event_name`  
     - `user_id, user_login_state, identity_source, client_id, session_id, is_first_visit`  
     - `context_product_id, context_product_name, context_product_category, context_product_brand`  
     - `context_product_price, context_product_discount_price, context_product_url_path`  
-  - R Shiny Server on port `3838`, app path `/sbw_dashboard`  
+  - R Shiny Server on port `3838`, web path `/sbw_dashboard`  
 
 - **Lambda ETL**: `SBW_Lamda_ETL` (VPC-enabled)  
   - Reads raw JSON from `clickstream-s3-ingest`  

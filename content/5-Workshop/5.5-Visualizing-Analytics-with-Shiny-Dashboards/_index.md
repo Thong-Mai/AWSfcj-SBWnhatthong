@@ -1,6 +1,8 @@
 ---
 title: "Visualizing Analytics with Shiny Dashboards"
 weight: 55
+chapter: false
+pre: " <b> 5.5. </b> "
 ---
 
 ## 5.5.1 R Shiny on the Data Warehouse EC2

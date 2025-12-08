@@ -1,6 +1,8 @@
 ---
 title: "Implementing Clickstream Ingestion"
 weight: 53
+chapter: false
+pre: " <b> 5.3. </b> "
 ---
 
 ## 5.3.1 Ingestion Flow Overview

@@ -1,9 +1,13 @@
 ---
 title: "Architecture Walkthrough"
 weight: 52
+chapter: false
+pre: " <b> 5.2. </b> "
 ---
 
 ![Architecture](/images/architecture.png)
+<p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
+
 
 ## 5.2.1 User-Facing Domain
 

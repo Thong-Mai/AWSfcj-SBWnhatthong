@@ -1,9 +1,11 @@
 ---
 title: "Building the Private Analytics Layer"
 weight: 54
+chapter: false
+pre: " <b> 5.4. </b> "
 ---
 
-## 5.4.1 VPC, Subnets và Route Tables
+## 5.4.1 Cấu hình VPC, Subnets và Route Tables
 
 - **VPC CIDR**: `10.0.0.0/16`  
 - **Public subnet**: `10.0.0.0/20` → `SBW_Project-subnet-public1-ap-southeast-1a`  
@@ -22,8 +24,6 @@ weight: 54
 - S3 prefix list → Gateway VPC Endpoint cho S3  
 - Không có route `0.0.0.0/0` tới IGW hoặc NAT Gateway  
 
-Điều này giúp lớp analytics **hoàn toàn private**, không truy cập trực tiếp ra Internet.
-
 ---
 
 ## 5.4.2 VPC Endpoints (S3 & SSM)
@@ -33,8 +33,7 @@ weight: 54
 ### S3 Gateway VPC Endpoint
 
 - Cho phép **truy cập S3 trong private network** cho:
-  - `SBW_Lamda_ETL`  
-  - `SBW_EC2_ShinyDWH` (cho backup hoặc các chức năng khác trong tương lai)  
+  - `SBW_Lamda_ETL`   
 - Không cần dùng NAT Gateway.
 
 ### SSM Interface Endpoints
@@ -51,7 +50,7 @@ Các endpoint này cho phép **Session Manager** quản lý và port-forward t�
 
 Trên EC2 private này:
 
-- PostgreSQL DB: `clickstream_dw` (schema `public`)  
+- PostgreSQL DB: `clickstream_dw`  
 - Bảng chính: `clickstream_events` với các field:
 
 ```text
@@ -73,16 +72,14 @@ context_product_discount_price
 context_product_url_path
 ```
 
-Bạn có thể thêm các bảng tổng hợp (sessions, funnels, …) sau này.
 
-Instance chỉ cho phép truy cập từ:
+Instance cho phép:
 
-- `SBW_Lamda_ETL` (qua `sg_Lambda_ETL` → `sg_analytics_ShinyDWH` trên port `5432`)  
-- Localhost trên chính EC2, được R Shiny sử dụng để connect DB  
-
+- `SBW_Lamda_ETL` conect postgreSQL DB: `clickstream_dw`
+- Localhost web Shiny thông qua SSM
 ---
 
-## 5.4.4 ETL Lambda – `SBW_Lamda_ETL` (chạy trong VPC)
+## 5.4.4 ETL Lambda – `SBW_Lamda_ETL` (chạy trong Private subnet)
 
 ETL Lambda là nơi xử lý batch chính.
 
@@ -101,17 +98,13 @@ ETL Lambda là nơi xử lý batch chính.
 
 1. Xác định danh sách files trong `s3://clickstream-s3-ingest/events/YYYY/MM/DD/` cho batch cần xử lý.  
 2. Với mỗi file JSON:
-   - Parse payload event.  
-   - Map field tương ứng với schema DW (`clickstream_events`).  
-3. Insert các dòng vào PostgreSQL:
-   - Nên thực hiện theo batch, trong transaction.  
+   - Extra
+   - Transform 
+   - Load
 
 **IAM role:**
 
-- `s3:GetObject`, `s3:ListBucket` trên `clickstream-s3-ingest`.  
-- Truy cập PostgreSQL được kiểm soát bởi user/password DB, không dùng IAM auth.  
-- Gắn policy kiểu `AWSLambdaVPCAccessExecutionRole` (hoặc tương đương) để Lambda quản lý ENI.
-
+- Cấp quyền cho Lamda truy cập vào EC2_ShinyDWH
 ---
 
 ## 5.4.5 Lên lịch bằng EventBridge – `SBW_ETL_HOURLY_RULE`
@@ -130,7 +123,7 @@ Mỗi lần rule chạy:
 2. Đọc các events mới từ S3 qua Gateway Endpoint.  
 3. Nạp dữ liệu đã xử lý vào `clickstream_dw`.  
 
-Bạn cũng có thể **trigger ETL Lambda thủ công** (từ Lambda console) cho mục đích backfill hoặc test.
+Ta cũng có thể **trigger ETL Lambda thủ công** (từ Lambda console) cho mục đích backfill hoặc test.
 
 ---
 
@@ -142,18 +135,3 @@ Bạn cũng có thể **trigger ETL Lambda thủ công** (từ Lambda console) c
 - `sg_analytics_ShinyDWH`:
   - Inbound `5432/tcp` từ `sg_Lambda_ETL`.  
   - Inbound `3838/tcp` cho Shiny (chỉ dùng qua SSM port forwarding).  
-
-Vì **không có route từ private subnet ra Internet**, bạn được lợi:
-
-- Giảm bề mặt tấn công  
-- Dễ kiểm soát đường đi traffic outbound  
-- Chi phí networking thấp hơn (không NAT Gateway)  
-
----
-
-## 5.4.7 Mapping sang LABs
-
-- Tạo VPC, subnets, route tables, endpoints, EC2:
-  - **LAB1 – Networking & EC2**  
-- Xây ETL Lambda + EventBridge:
-  - **LAB3 – EventBridge & Lambda ETL**  
