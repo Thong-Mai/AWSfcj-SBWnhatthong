@@ -3,6 +3,8 @@ title: "Architecture Walkthrough"
 weight: 52
 ---
 
+![Architecture](/images/architecture.png)
+
 ## 5.2.1 User-Facing Domain
 
 ### Frontend – Amplify + CloudFront + Cognito
