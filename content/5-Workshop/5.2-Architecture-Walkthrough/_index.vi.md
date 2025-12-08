@@ -5,183 +5,372 @@ chapter: false
 pre: " <b> 5.2. </b> "
 ---
 
-![Architecture](/images/architecture.png)
-<p align="center"><em>Figure: Architecture Batch-base Clickstream Analytics Platform.</em></p>
+![Architecture](/images/workshop-architecture.png)
+<p align="center"><em>Hình: Batch-based Clickstream Analytics Platform.</em></p>
 
+---
 
-## 5.2.1 Miền User-Facing
+## 5.2.1 Miền User & Frontend
 
-### Frontend – Amplify + CloudFront + Cognito
+### (1) User Browser – Người dùng
 
-- **Ứng dụng Next.js**: `ClickSteam.NextJS`  
-- Được host bởi **AWS Amplify Hosting** với CloudFront tích hợp sẵn làm CDN.  
-- Ví dụ URL:  
-  - `https://main.d2q6im0b1720uc.amplifyapp.com/`  
-- **Amazon Cognito User Pool** xử lý đăng ký, đăng nhập, cấp token.  
-- Frontend:
-  - Render trang catalog sản phẩm (SSR)  
-  - Dựa trên Cognito token để biết user đã đăng nhập hay chưa  
-  - Gửi clickstream events tới `clickstream-http-api`  
+**Nhiệm vụ**
 
-### Cơ sở dữ liệu OLTP – `SBW_EC2_WebDB` 
+- Truy cập website: duyệt catalogue, xem trang chi tiết sản phẩm, giỏ hàng, checkout…
+- Đăng nhập / đăng ký tài khoản.
+- Phát sinh **clickstream events** như:
+  - `page_view`, `product_view`, `add_to_cart`, `purchase`, …
 
-- EC2 instance: `SBW_EC2_WebDB` trong public subnet `SBW_Project-subnet-public1-ap-southeast-1a`  
-- PostgreSQL lắng nghe trên port `5432`  
-- Database: `clickstream_web` (schema `public`)  
+**Vai trò trong pipeline**
 
-Một số bảng điển hình:
+- Là **nguồn gốc mọi hành vi** mà hệ thống analytics phân tích.
+- JavaScript ở frontend sẽ gom các event này và gửi về backend thông qua API (6).
 
-- `users`  
-- `products`  
-- `orders`  
-- `order_items`  
-- `inventory`  
+---
 
-Ứng dụng Amplify kết nối qua **Prisma** sử dụng `DATABASE_URL` trỏ tới endpoint public của EC2 này.  
-> Trong production “chuẩn chỉnh”, OLTP DB thường chạy trên Amazon RDS trong private subnet, phía sau một backend API layer. Trong workshop này, ta chấp nhận EC2 DB public để tập trung vào phần analytics.
+### (2) Amazon CloudFront (CDN / Edge)
+
+**Nhiệm vụ**
+
+- Là lớp **CDN** phân phối nội dung cho website:
+  - Cache HTML/CSS/JS/images để giảm latency.
+  - Giảm tải cho origin (Amplify, S3 assets).
+- Có thể làm **điểm vào chung** cho traffic web:
+  - Route/forward request:
+    - Nội dung web động → Amplify.
+    - Ảnh / media tĩnh → S3 (3).
+
+**Tại sao quan trọng**
+
+- Website thương mại điện tử cần **tốc độ tải trang** tốt.  
+- CloudFront giúp cải thiện trải nghiệm người dùng ở nhiều khu vực địa lý.
+
+---
+
+### (3) Amazon S3 – Media Assets
+
+**Nhiệm vụ**
+
+- Lưu **ảnh sản phẩm** và các **assets tĩnh** khác của website.
+- Đóng vai trò **origin** khi CloudFront (2) phục vụ ảnh/asset.
+
+**Lưu ý**
+
+- Bucket này (ví dụ `clickstream-s3-sbw`) **tách biệt** khỏi RAW clickstream bucket (8) để:
+  - Phân quyền rõ ràng.
+  - Dễ quản trị, dễ dọn dẹp.
+
+---
+
+### (4) Amazon Amplify – Front-end Hosting
+
+**Nhiệm vụ**
+
+- Build & deploy ứng dụng **Next.js** (ví dụ `ClickSteam.NextJS`).
+- Host frontend (SSR/ISR, API routes).
+- Quản lý pipeline deploy: build, artifact, domain mapping.
+
+**Liên kết với dịch vụ khác**
+
+- Kết nối với **Cognito (5)** để xử lý đăng nhập.
+- Gửi **clickstream events** từ frontend tới **API Gateway (6)**.
+- Kết nối tới **EC2 OLTP (20)** qua Prisma để đọc/ghi dữ liệu giao dịch.
+
+---
+
+### (5) Amazon Cognito – Authentication / Authorization
+
+**Nhiệm vụ**
+
+- Quản lý **user identity**:
+  - Đăng ký / đăng nhập / reset password.
+  - Lưu user pool, cấp token JWT (ID token, access token).
+- Cấp token cho frontend để gọi các API backend theo đúng quyền.
+
+**Vai trò trong clickstream**
+
+- Cho phép xác định được trạng thái:
+  - `user_login_state` (logged-in / guest).
+  - `identity_source` (Cognito, social login…).
+- Các thông tin này được gắn vào event và lưu xuống S3/DWH để phân tích hành vi user.
 
 ---
 
 ## 5.2.2 Miền Ingestion & Data Lake
 
-### API Gateway HTTP API – `clickstream-http-api`
+### (6) Amazon API Gateway – Clickstream HTTP API
 
-- HTTP API public expose:
-  - `POST /clickstream`  
-- Integration: Lambda `clickstream-lambda-ingest`  
+**Nhiệm vụ**
 
-### Lambda Ingest – `clickstream-lambda-ingest`
+- Cung cấp endpoint HTTP public cho frontend:
+  - `POST /clickstream`.
+- Thực hiện validate cơ bản:
+  - Method/path, throttling.
+  - Tùy chọn: tích hợp Cognito authorizer.
 
-- Lambda stateless (không gắn VPC) có nhiệm vụ:
-  - Nhận JSON payload từ frontend  
-  - Validate và enrich event (timestamp, session ID, login state, context sản phẩm, …)  
-  - Ghi JSON thô vào S3 bucket `clickstream-s3-ingest` với path dạng:
-    - `events/YYYY/MM/DD/event-<uuid>.json`  
+**Luồng xử lý**
 
-IAM cho function này được hạn chế tới:
-
-- `s3:PutObject` trên bucket `clickstream-s3-ingest`  
-- Quyền CloudWatch Logs để ghi log  
-
-### S3 Raw Clickstream Bucket – `clickstream-s3-ingest`
-
-- Region: `ap-southeast-1` (Singapore)  
-- Bucket chứa **JSON clickstream thô**:
-  - Không chứa dữ liệu đã xử lý / curated  
-- Cấu trúc:
-  - `events/YYYY/MM/DD/`  
-- Mẫu tên file:
-  - `event-<uuid>.json`  
-
-Bucket riêng `clickstream-s3-sbw` dùng để chứa **website assets** (ảnh sản phẩm, static files) và **không** dùng cho clickstream.
+- Nhận request JSON từ browser.
+- Forward payload tới **Lambda Clickstream Ingest (7)**.
 
 ---
 
-## 5.2.3 Miền Analytics & Data Warehouse
+### (7) AWS Lambda – Clickstream Ingest
 
-### EC2 DW + Shiny – `SBW_EC2_ShinyDWH` (Private Subnet)
+**Nhiệm vụ chính**
 
-- EC2 nằm trong private subnet: `SBW_Project-subnet-private1-ap-southeast-1a`  
-- Không có public IP  
-- Gắn IAM role `AmazonSSMManagedInstanceCore`  
+- Nhận event từ API Gateway (6).
+- Đóng vai trò **ingestion layer**:
 
-Trên instance này:
+  - Validate schema / loại event.
+  - Enrich tối thiểu:
+    - Sinh `event_id`.
+    - Chuẩn hoá `event_timestamp`.
+    - Gắn `client_id`, `session_id`, `user_login_state`, `identity_source` nếu cần.
 
-1. **PostgreSQL Data Warehouse**
-   - Database: `clickstream_dw` (schema `public`)  
-   - Bảng chính: `clickstream_events` với các field:
-     - Event info: `event_id`, `event_timestamp`, `event_name`  
-     - User/session info: `user_id`, `user_login_state`, `identity_source`, `client_id`, `session_id`, `is_first_visit`  
-     - Product context: `context_product_id`, `context_product_name`, `context_product_category`, `context_product_brand`, `context_product_price`, `context_product_discount_price`, `context_product_url_path`  
+- Ghi event thô (`raw JSON`) xuống **S3 Clickstream Raw bucket (8)** theo prefix/time-partition.
 
-2. **R Shiny Server**
-   - Lắng nghe port `3838`  
-   - Host app dashboard: `sbw_dashboard`  
-   - URL nội bộ: `http://localhost:3838/sbw_dashboard`  
-
-### ETL Lambda – `SBW_Lamda_ETL` (chạy trong VPC)
-
-- Lambda được cấu hình để chạy **bên trong VPC**:
-  - Subnet: `SBW_Project-subnet-private1-ap-southeast-1a`  
-  - Security group: `sg_Lambda_ETL`  
-- Environment variables:
-  - `DWH_HOST`, `DWH_PORT=5432`, `DWH_USER`, `DWH_PASSWORD`, `DWH_DATABASE=clickstream_dw`  
-  - `RAW_BUCKET=clickstream-s3-ingest`  
-  - `AWS_REGION=ap-southeast-1`  
-
-ETL Lambda:
-
-- Liệt kê các file mới trong `clickstream-s3-ingest/events/YYYY/MM/DD/`  
-- Đọc và parse JSON  
-- Map dữ liệu thành các dòng cho bảng `clickstream_events`  
-- Insert batch vào Data Warehouse  
-
-### EventBridge Rule – `SBW_ETL_HOURLY_RULE`
-
-- Quy tắc EventBridge dùng để lên lịch ETL:
-  - `rate(1 hour)`  
-- Target: `SBW_Lamda_ETL`  
-- Đảm bảo clickstream events mới được xử lý ít nhất mỗi giờ một lần.
+- Ghi log ra **CloudWatch (17)** để debug.
 
 ---
 
-## 5.2.4 Thiết kế Networking & Security
+### (8) Amazon S3 – Clickstream Raw Data
 
-### VPC & Subnets
+**Nhiệm vụ**
 
-- VPC CIDR: `10.0.0.0/16`  
-- Public subnet:
-  - `10.0.0.0/20` – `SBW_Project-subnet-public1-ap-southeast-1a` (EC2 OLTP)  
-- Private subnet:
-  - `10.0.128.0/20` – `SBW_Project-subnet-private1-ap-southeast-1a` (DW, Shiny, ETL)  
+- Lưu toàn bộ dữ liệu **clickstream thô** do Lambda Ingest (7) đổ vào.
+- Đóng vai trò một **“mini data lake”** cho batch ETL:
 
-**Public Route Table**
+  - Dữ liệu tổ chức theo **folder/prefix thời gian**:
+    - `events/YYYY/MM/DD/`.
+  - ETL (11) đọc dữ liệu theo lô (theo giờ / theo ngày…).
 
-- `10.0.0.0/16 → local`  
-- `0.0.0.0/0 → Internet Gateway`  
+**Vai trò kiến trúc**
 
-**Private Route Table**
-
-- `10.0.0.0/16 → local`  
-- S3 prefix list → Gateway VPC Endpoint cho S3  
-- Không có route `0.0.0.0/0` tới IGW hoặc NAT Gateway  
-
-> Quyết định quan trọng: **Không dùng NAT Gateway**.  
-> Các thành phần private (DW, Shiny, ETL) truy cập S3 qua Gateway Endpoint, quản trị qua SSM Interface Endpoints.
-
-### VPC Endpoints
-
-- **Gateway Endpoint** cho S3:
-  - Cho phép ETL Lambda và DW EC2 truy cập `clickstream-s3-ingest` trong private network.  
-- **Interface Endpoints**:
-  - `com.amazonaws.ap-southeast-1.ssm`  
-  - `com.amazonaws.ap-southeast-1.ssmmessages`  
-  - `com.amazonaws.ap-southeast-1.ec2messages`  
-
-Nhờ đó **SSM Session Manager** có thể hoạt động hoàn toàn trong mạng riêng của AWS.
-
-### Security Groups
-
-- `sg_oltp_webDB`
-  - Inbound:
-    - `5432/tcp` từ Amplify / IP admin  
-    - `22/tcp` từ IP admin (tùy chọn; có thể bỏ nếu dùng SSM hoàn toàn)  
-- `sg_analytics_ShinyDWH`
-  - Inbound:
-    - `5432/tcp` từ `sg_Lambda_ETL`  
-    - `3838/tcp` cho Shiny (chỉ truy cập qua SSM port forward)  
-- `sg_Lambda_ETL`
-  - Outbound tới `sg_analytics_ShinyDWH` trên port `5432`  
-  - Outbound tới S3 thông qua Gateway Endpoint  
-- `sg_ec2_VPC_Interface_endpoint_SSM`
-  - Inbound `443/tcp` từ private subnets cho các endpoint SSM  
+- Là **source of truth** cho clickstream:
+  - Có thể reprocess hoặc rebuild Data Warehouse nếu cần.
 
 ---
 
-## 5.2.5 Mapping
+### (9) Amazon EventBridge – ETL Trigger / Cron Job
 
-- **VPC + EC2** → xem **LAB1 – Networking & EC2**  
-- **S3 + Lambda Ingest + API Gateway** → xem **LAB2 – S3, Lambda Ingest & API Gateway**  
-- **ETL Lambda + EventBridge + DW** → xem **LAB3 – EventBridge & Lambda ETL**  
-- **Amplify Frontend + Clickstream SDK** → xem **LAB4 – Frontend (Amplify) & Clickstream SDK**  
-- **R Shiny + kiểm thử end-to-end** → xem **LAB5 – R Shiny Analytics & Validation**  
+**Nhiệm vụ**
+
+- Chạy lịch batch schedule, ví dụ: `rate(1 hour)`.
+- Mỗi lần đến lịch:
+  - Trigger **Lambda ETL (11)**.
+
+**Tại sao tách riêng**
+
+- “Đồng hồ” ETL nằm ở EventBridge:
+  - Dễ chỉnh tần suất (1h, 30’, 5’…).
+  - Dễ disable/enable.
+  - Tách “khi nào chạy” khỏi logic ETL.
+
+---
+
+## 5.2.3 Miền VPC & Private Analytics
+
+### (19) VPC + Subnets + Internet Gateway
+
+**Amazon VPC**
+
+- Cô lập mạng, kiểm soát routing / security cho toàn platform.
+
+**Public subnet – OLTP**
+
+- Chứa **EC2 OLTP (20)**.
+- Có route `0.0.0.0/0 → Internet Gateway`.
+- Cho phép:
+  - Amplify/Internet truy cập PostgreSQL OLTP theo SG.
+
+**Private subnet – Analytics**
+
+- Chứa:
+  - **EC2 Shiny + DWH (12)**.
+  - **Lambda ETL (11)**.
+- Không có public IP.
+- Chỉ đi ra ngoài qua các **VPC Endpoint (10, 15)**.
+
+**Internet Gateway**
+
+- Cấp đường Internet cho tài nguyên trong public subnet.
+- Private subnet không route ra IGW (trừ khi bạn cấu hình khác).
+
+---
+
+### (10) Gateway Endpoint – S3 Gateway Endpoint
+
+**Nhiệm vụ**
+
+- Cho phép tài nguyên trong VPC (Lambda ETL, EC2 private) truy cập S3 (8) **mà không cần NAT/Internet**.
+- Traffic đến S3 đi qua **mạng riêng AWS**, bảo mật và rẻ hơn NAT Gateway.
+
+**Vai trò**
+
+- Là mảnh ghép quan trọng để:
+  - Giữ nguyên quyết định “**không dùng NAT Gateway**”.
+  - Vẫn cho phép ETL / DW đọc ghi S3.
+
+---
+
+### (11) AWS Lambda – ETL
+
+**Nhiệm vụ**
+
+- Được **EventBridge (9)** trigger theo lịch.
+- Chạy bên trong **private subnet** của VPC.
+- Thực hiện ETL batch:
+
+  - Đọc raw events từ **S3 (8)** qua Gateway Endpoint (10).
+  - Transform / clean / flatten theo schema Data Warehouse (ví dụ 15 field bạn đã chốt).
+  - Load vào **PostgreSQL DWH trên EC2 private (12)**:
+    - Insert / upsert, có thể partition theo ngày/giờ.
+
+- Ghi log và metrics ra **CloudWatch (17)**; khi lỗi có thể gửi thông báo qua **SNS (18)**.
+
+---
+
+### (12) Amazon EC2 – Private (Shiny + DWH)
+
+**Nhiệm vụ**
+
+- Máy chủ **Data Warehouse (PostgreSQL)** + **Shiny Server**.
+- Nhận dữ liệu đã chuẩn hoá từ Lambda ETL (11) và lưu vào các bảng DWH.
+- Cung cấp dữ liệu cho dashboard Shiny:
+  - Shiny truy vấn Postgres local/private.
+
+**Đặc điểm**
+
+- Chạy trong **private subnet**.
+- Không có public IP.
+- Truy cập quản trị qua **SSM Session Manager (14 + 15)**.
+
+---
+
+### (13) R Shiny Server (trên EC2 Private)
+
+**Nhiệm vụ**
+
+- Host các dashboard phân tích:
+
+  - KPI tổng quan.
+  - Conversion funnel.
+  - Top products.
+  - Hành vi user, session analysis…
+
+- Kết nối trực tiếp tới **PostgreSQL DWH** trên cùng EC2.
+
+**Truy cập**
+
+- Lắng nghe trên port `3838`.
+- Thường được truy cập qua:
+
+  - VPN nội bộ, hoặc
+  - **SSM port forwarding** (14).
+
+---
+
+### (14) AWS Systems Manager – Session Manager
+
+**Nhiệm vụ**
+
+- Cho admin truy cập EC2 private **không cần SSH, không cần public IP**.
+- Hỗ trợ:
+
+  - Mở terminal vào EC2 (run command).
+  - **Port forwarding** (ví dụ forward `localhost:3838` → Shiny trên EC2).
+  - Audit phiên truy cập tốt hơn.
+
+**Ví dụ**
+
+- Bạn có thể chạy Shiny từ máy local tại:  
+  `http://localhost:3838/sbw_dashboard`  
+  sau khi cấu hình session port-forward thành công.
+
+---
+
+### (15) Interface Endpoint – SSM VPC Endpoints
+
+**Nhiệm vụ**
+
+- Tạo đường kết nối **private** từ EC2/Lambda trong VPC đến các dịch vụ SSM/Session Manager:
+
+  - `ssm`, `ssmmessages`, `ec2messages`, …
+
+- Đảm bảo:
+
+  - EC2 private vẫn dùng được SSM.
+  - Không phải đi qua Internet/NAT.
+
+---
+
+## 5.2.4 Cross-cutting Services
+
+### (16) Amazon IAM
+
+**Nhiệm vụ**
+
+- Quản lý **role/policy** cho toàn hệ thống:
+
+  - Permission cho API Gateway, Lambda.
+  - Lambda Ingest ghi S3 (8).
+  - Lambda ETL đọc S3 (8) + connect DB (12).
+  - EC2 role cho SSM + CloudWatch agent (nếu có).
+
+**Nguyên tắc**
+
+- **Least privilege**.
+- Tách quyền rõ theo chức năng và theo từng service.
+
+---
+
+### (17) Amazon CloudWatch
+
+**Nhiệm vụ**
+
+- Thu thập **logs & metrics** từ:
+
+  - Lambda Ingest (7).
+  - Lambda ETL (11).
+  - EventBridge rule (9).
+  - EC2 nếu cài agent.
+
+- Định nghĩa **alarms**: lỗi ETL, lỗi ingest, số lần retry, duration, v.v.
+
+**Vai trò**
+
+- Là nơi **debug chính** khi pipeline có vấn đề.
+
+---
+
+### (18) Amazon SNS
+
+**Nhiệm vụ**
+
+- Là **kênh thông báo** khi có sự cố:
+
+  - ETL fail.
+  - Ingest fail.
+  - CloudWatch alarm kích hoạt.
+
+- Gửi email / SMS / webhook tuỳ cấu hình.
+
+---
+
+### (20) Amazon EC2 – Public (OLTP)
+
+**Nhiệm vụ**
+
+- Chạy **PostgreSQL OLTP** phục vụ hệ thống web thương mại điện tử:
+
+  - Giao dịch đơn hàng.
+  - Thông tin sản phẩm, tồn kho.
+  - Thông tin người dùng.
+
+**Liên hệ với DWH**
+
+- **Tách** khỏi Data Warehouse (12):
+
+  - OLTP tối ưu cho **giao dịch**.
+  - DWH tối ưu cho **phân tích, batch load**.
