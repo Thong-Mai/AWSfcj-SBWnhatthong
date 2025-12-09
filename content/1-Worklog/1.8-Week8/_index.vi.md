@@ -5,50 +5,30 @@ chapter: false
 pre: " <b> 1.8. </b> "
 ---
 
-### Mục tiêu tuần 8:
+### Mục tiêu cần làm tuần 8:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Viết và hoàn thiện **proposal** cho dự án.
+- Chỉnh sửa kiến trúc để phù hợp với nội dung đề xuất.
+- Phân công rõ ràng từng phần nội dung proposal cho từng thành viên.
+- Nhận diện sơ bộ khó khăn về **realtime vs batch**.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc                                                                                                                                                                                        | Ngày bắt đầu       | Ngày hoàn thành | Nguồn tài liệu         |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------ | --------------- | ---------------------- |
+| 1   | Họp team: chỉnh sửa proposal, phân chia các phần: Technical Implementation, Timeline & Milestones, Budget Estimation, Risk Assessment, Expected Outcomes, thảo luận khó khăn khi làm realtime. | 20/10/2025 22:00   | 21/10/2025 01:40|   |
+| 2   | Họp tiếp: chỉnh lại architecture theo góp ý, cập nhật để khớp với nội dung proposal, thống nhất bản **proposal hoàn chỉnh**.                                                                    | 21/10/2025 19:00   | 21/10/2025 23:30|     |
+| 3   | Cá nhân: soạn nội dung **Risk Assessment** (các nhóm rủi ro kỹ thuật, chi phí, tiến độ, dữ liệu) và đề xuất cách giảm thiểu.                                                                    | 22/10/2025         | 23/10/2025      | |
+| 4   | Rà soát toàn bộ proposal, kiểm tra chính tả, format, link, đảm bảo logic mạch lạc trước khi nộp.                                                                                                | 24/10/2025         | 25/10/2025      |    |
 
 ### Kết quả đạt được tuần 8:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Proposal đã được **hoàn thiện và chốt nội dung**.
+- Architecture được cập nhật để:
+  - Phản ánh đúng các dịch vụ AWS sẽ dùng.
+  - Tập trung vào **batch-based clickstream** thay vì ép làm realtime phức tạp.
+- Cá nhân mình:
+  - Viết được phần **Risk Assessment**, từ đó hiểu rõ:
+    - Những chỗ có thể dễ fail (kỹ thuật, chi phí, thời gian).
+    - Cần có kế hoạch backup, kiểm thử và giới hạn phạm vi.
+- Cả team có chung một **“bản hợp đồng” kỹ thuật** để bám theo trong các tuần tiếp theo.

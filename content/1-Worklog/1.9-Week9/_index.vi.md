@@ -5,50 +5,29 @@ chapter: false
 pre: " <b> 1.9. </b> "
 ---
 
-### Mục tiêu tuần 9:
+### Mục tiêu cần làm tuần 9:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Gặp mặt offline lần đầu, thống nhất cách làm việc trực tiếp.
+- Hoàn thiện **proposal trên Git**, cấu hình hiển thị.
+- Bắt đầu nghiên cứu **Cognito, S3, ORM** và tiến hành **build web thương mại điện tử**.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc                                                                                                                                                                                | Ngày bắt đầu       | Ngày hoàn thành | Nguồn tài liệu       |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | --------------- | -------------------- |
+| 1   | Offline meeting: gặp mặt team, kiểm tra lại proposal, sửa lỗi nhỏ, đẩy nội dung lên Git/GitPages, phân chia các đầu việc giai đoạn tiếp theo.                                           | 28/10/2025 09:00   | 28/10/2025 12:00|    |
+| 2   | Họp online: nghiên cứu **Amazon Cognito & S3**, bắt đầu build web bằng template sẵn từ git, quyết định không dùng backend riêng, xem lại kiến trúc và cơ chế clickstream.             | 29/10/2025 22:30   | 30/10/2025 00:30|   |
+| 3   | Học thêm về ORM trong template frontend (cách mapping dữ liệu, models, migrate), ghi chú để sau này kết nối với database thật.                                                          | 30/10/2025         | 31/10/2025      |   |
+| 4   | Họp: xác nhận web đã build xong bản đầu tiên, thảo luận bước tiếp theo: tạo data, nghiên cứu CloudFront, Amplify, LocalStack, chuẩn hóa môi trường Python & thư viện.                | 05/11/2025 14:15   | 05/11/2025 15:40|   |
+| 5   | Cá nhân: test các chức năng cơ bản trên web (xem sản phẩm, thêm giỏ, đặt hàng), ghi lại bug UI/logic để báo với team.                                                                  | 06/11/2025         | 07/11/2025      |              |
 
 ### Kết quả đạt được tuần 9:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Lần đầu **gặp mặt offline**, không khí làm việc nhóm tốt hơn, trao đổi nhanh hơn.
+- Proposal đã được:
+  - Đưa lên Git/GitPages, dễ tra cứu hơn.
+- Web thương mại điện tử:
+  - Đã build được bản đầu tiên chạy trên local.
+  - Dựa trên template sẵn, đã hiểu sơ cấu trúc code và ORM.
+- Cả team bắt đầu nói nhiều hơn về:
+  - **Cognito, S3, CloudFront, Amplify, LocalStack** – chuẩn bị bước vào phần hạ tầng phức tạp hơn.

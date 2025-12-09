@@ -7,64 +7,34 @@ pre: " <b> 1.1. </b> "
 
 ### Mục tiêu cần làm tuần 1:
 
-- Lên văn phòng cùng team và hiểu nội quy của văn phòng.
-- Hiểu cách viết workshop.
-- Tìm hiểu AWS tạo tài khoản.
+- Làm quen văn phòng, nội quy và cách làm việc tại AWS First Cloud Journey.
+- Hiểu cách viết **workshop** và cấu trúc nội dung trên Hugo.
+- Tạo tài khoản AWS, kích hoạt credit Free Tier và làm một số nhiệm vụ cơ bản.
+- Nắm được khái niệm **Cloud Computing** và **AWS global infrastructure**.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                  | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                                                                 |
-| --- | ---------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------------------------------------------------------------------- |
-| 1   | - Hiểu rõ nội quy của văn phòng và thực hiện đúng cho những buổi sau                                       | 08/09/2025   | 09/09/2025      |
-| 2   | - Viết workshop cách tạo sườn                                                                              | 10/09/2025   | 13/09/2025      | <https://www.youtube.com/watch?v=mXRqgMr_97U&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=3>  |
-| 3   | - Tạo tài khoản AWS và làm nhiệm vụ nhận 200 credit free <br> - Thực hành sơ bộ với các nhiệm vụ nhận 200$ | 14/09/2025   | 14/09/2025      |                                                                                                |
-| 4   | - Học và hiểu về cloud                                                                                     | 15/09/2025   | 17/09/2025      | <https://www.youtube.com/watch?v=HxYZAK1coOI&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=4>  |
-| 5   | - Thực hiện tạo IAM user để admin user và admin group                                                      | 16/09/2025   | 16/09/2025      | <https://www.youtube.com/watch?v=b9pK1oG534Q&list=PLahN4TLWtox2a3vElknwzU_urND8hLn1i&index=13> |
+| Thứ | Công việc                                                                                                              | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                                                                                  |
+| --- | ---------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------------------------------------------------------------- |
+| 1   | Lên văn phòng, nghe phổ biến nội quy, quy tắc sử dụng không gian làm việc, kênh liên lạc và lịch sinh hoạt với team. | 08/09/2025   | 09/09/2025      |                                                                                                 |
+| 2   | Tìm hiểu cách viết **workshop**: cấu trúc file `.md`, front matter, cách chèn hình, link, code trong Hugo.           | 10/09/2025   | 13/09/2025      | [AWS Study Group](https://www.youtube.com/@AWSStudyGroup)                                        |
+| 3   | Tạo tài khoản AWS, hoàn thành nhiệm vụ kích hoạt **200$ credit**, thử login Console, xem qua các dịch vụ cơ bản.     | 14/09/2025   | 14/09/2025      |                                               |
+| 4   | Học khái niệm **Cloud là gì, IaaS/PaaS/SaaS, ưu điểm của cloud, mô hình trả phí theo dùng bao nhiêu trả bấy nhiêu.** | 15/09/2025   | 17/09/2025      | [AWS Study Group](https://www.youtube.com/@AWSStudyGroup)                                                         |
+| 5   | Tạo **IAM user & IAM group** đầu tiên, bật MFA cho tài khoản, làm quen với phần IAM Dashboard.                       | 16/09/2025   | 16/09/2025      |                            |
 
 ### Kết quả đạt được tuần 1:
 
-- Lên văn phòng kết nối được với các đồng nghiệp cùng làm tại AWS First Cloud Journey, Làm quen được với 2 bạn học về 1 bạn học BE và 1 bạn Chung ngành khác nhóm.
-
-- Đã chạy được hugo và test thành công, hiểu được cách viết của workshop hỗ trợ cho việc viết cho các tuần sau cũng cung như proposal và translated blogs(Done và hiểu).
-
-- Hiểu về cloud là gì:
-
-  - Là sự phân phối tài nguyên Công Nghệ Thông Tin thông qua Internet.
-  - Thanh toán tài nguyên theo mức độ sử dụng.
-  - Tối ưu hóa được chi phí, xài bao nhiêu tính bấy nhiêu, tốc độ nhanh.
-  - Linh hoạt trong việc thêm hoặc bớt tài nguyên 1 cách hợp lý.
-  - Quy mô rộng, ứng dụng trên toàn cầu.
-
-- Để học được Cloud thì:
-
-  - Kết bạn học hỏi cùng nhau, học từ các người đi trước
-  - Trải nghiệm và sử dụng các dịch vụ của AWS
-  - Học qua các nền tảng online học tư học
-
-- Tạo tài khoản hiểu về AWS và các công cụ:
-
-  - Tạo thành công tài khoản và nhận được 200$ sau khi làm các nhiệm vụ activate.
-  - Hiểu rõ root user và IAM user, root user là tài khoản gốc quản lý tất cả, IAM user được tạo ra bởi root user và được tài khoản gốc cấp quyền quản lý.
-  - Tạo MFA cho tài khoản đảm bảo an toàn bảo mật.
-
-- Tạo user:
-  - Để tạo vào console của AWS tìm kiếm **IAM (Identity and Access Management)**.
-  - Sau đó thấy Dashboard của nó và chú ý đến hai yếu tố là **User** và **User Group**'
-  - Tạo User chọn User để tạo và bấm vào **create user**.
-  - Nhập tên user và tích chọn **Provide user access to the AWS Management Console - optional**, để tạo mật khẩu chọn **user I want to create an IAM user** => **I want to create an IAM user** => **next**
-  - Bấm next tiếp và create user
-- Tạo user:
-  - Tạo User Group vào console của AWS tìm kiếm **IAM (Identity and Access Management)**.
-  - Chọn **User Group** => **Create user group** => **Nhập tên group và tạo**.
-  - Chọn vào group đã tạo, chon add user để add, chon user cần add và add user.
-    ![anh](/images/1.png)
-    ![anh](/images/2.png)
-    ![anh](/images/3.png)
-    ![anh](/images/4.png)
-    ![anh](/images/5.png)
-    ![anh](/images/6.png)
-    ![anh](/images/7.png)
-    ![anh](/images/8.png)
-    ![anh](/images/9.png)
-    ![anh](/images/10.png)
-    ![anh](/images/11.png)
+- Đã **làm quen môi trường văn phòng**, biết rõ:
+  - Cách sử dụng không gian, giờ giấc, quy tắc trao đổi với mentor và đồng đội.
+  - Kết nối được với một số bạn cùng tham gia chương trình.
+- Hiểu cấu trúc cơ bản của **workshop trên Hugo**:
+  - Biết tạo file `.md`, thêm front matter, viết nội dung theo dạng section, chèn hình minh họa.
+  - Đây là nền tảng cho việc viết các workshop & tài liệu báo cáo sau này.
+- Tạo thành công **tài khoản AWS**:
+  - Đã kích hoạt được **credit 200$ Free Tier**.
+  - Biết cách đăng nhập Console và tìm kiếm dịch vụ bằng thanh search.
+- Nắm được khái niệm cơ bản về **Cloud Computing**:
+  - Cloud giúp dùng tài nguyên CNTT qua Internet, trả tiền theo mức sử dụng.
+  - Nhận thức được lợi ích về chi phí, tính linh hoạt và khả năng mở rộng.
+- Biết cách:
+  - Tạo IAM User, IAM Group, gán quyền và bật **MFA** để tăng bảo mật cho tài khoản AWS của mình.

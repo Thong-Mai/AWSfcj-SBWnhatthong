@@ -5,32 +5,24 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-**On this page**, you will need to introduce your worklog. **How** did you complete it? How many weeks did you take to complete the program? **What** did you do in those weeks?
+In this Worklog, I record my entire journey in the program, divided into **two main phases**:
 
-Typically, and as a standard, a worklog is carried out over about 3 months (throughout the internship period) with weekly contents as follows:
+- **Week 1 to Week 6**: Learning AWS fundamentals (cloud, networking, EC2, S3, security, databases, preparing for the project).
+- **Week 7 to Week 13**: Implementing the **Clickstream Analytics project for an e-commerce site selling computers and related devices**, including: choosing the topic, designing the architecture, writing the proposal, building the web app, deploying with AWS/LocalStack/Terraform, designing data tables, monitoring the system, and finishing the Workshop.
+---
 
-**Week 1:** [Understand and set up the necessary resources for learning basic cloud on AWS.](1.1-week1/)
+### Content Worklog
 
-**Week 2:** [Getting familiar with Amazon VPC (Virtual Private Cloud) and VPN - Direct Connect - Load Balancer - Extra Resources.](1.2-week2/)
-
-**Week 3:** [Understand how to run and connect to AWS virtual machine services.](1.3-week3/)
-
-**Week 4:** [Virtual Machine (VM) service on AWS.](1.4-week4/)
-
-**Week 5:** [Cloud storage service on AWS.](1.5-week5/)
-
-**Week 6:** [Security service on AWS.](1.6-week6/)
-
-**Week 7:** [Database services on AWS.](1.7-week7/)
-
-**Week 8:** [Doing task H...](1.8-week8/)
-
-**Week 9:** [Doing task I...](1.9-week9/)
-
-**Week 10:** [Doing task L...](1.10-week10/)
-
-**Week 11:** [Doing task M...](1.11-week11/)
-
-**Week 12:** [Doing task N...](1.12-week12/)
-
-**Week 13:** [Doing task N...](1.13-week13/)
+- [Week 1 Worklog](1.1-week1/)
+- [Week 2 Worklog](1.2-week2/)
+- [Week 3 Worklog](1.3-week3/)
+- [Week 4 Worklog](1.4-week4/)
+- [Week 5 Worklog](1.5-week5/)
+- [Week 6 Worklog](1.6-week6/)
+- [Week 7 Worklog](1.7-week7/)
+- [Week 8 Worklog](1.8-week8/)
+- [Week 9 Worklog](1.9-week9/)
+- [Week 10 Worklog](1.10-week10/)
+- [Week 11 Worklog](1.11-week11/)
+- [Week 12 Worklog](1.12-week12/)
+- [Week 13 Worklog](1.13-week13/)

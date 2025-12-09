@@ -5,50 +5,29 @@ chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
-### Mục tiêu tuần 10:
+### Mục tiêu cần làm tuần 10:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Rà lại phần **CloudFront, Amplify**, chọn hướng dùng LocalStack.
+- Chỉnh sửa lại kiến trúc cho phù hợp với thiết kế mới (Amplify, PostgreSQL, v.v.).
+- Bắt đầu dùng **Docker** để đóng gói môi trường, và chuẩn bị **template báo cáo**.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc                                                                                                                                                                                                 | Ngày bắt đầu       | Ngày hoàn thành | Nguồn tài liệu    |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | --------------- | ----------------- |
+| 1   | Họp: xem lại CloudFront, quyết định dùng **LocalStack bản Base** để hỗ trợ nhiều dịch vụ hơn (đặc biệt là Cognito), đổi database web sang Supabase, chỉnh lại flow kiến trúc.                            | 09/11/2025 20:30   | 09/11/2025      | |
+| 2   | Thảo luận: liệt kê các thư viện Python cần dùng, kiểm tra version, chỉnh sửa lại proposal cho phù hợp với kiến trúc mới.                                          | 09/11/2025         | 10/11/2025      |            |
+| 3   | Họp: tìm hiểu Docker, cách cài thư viện vào image, chuẩn bị idea “dùng Docker + LocalStack” làm môi trường chuẩn; đồng thời sửa lại architecture và bản tiếng Việt của tài liệu.                         | 11/11/2025 20:00   | 11/11/2025 23:30||
+| 4   | Họp ngắn: chỉnh sửa kiến trúc lên **phiên bản v9**, thống nhất các service bắt buộc phải có trong mô hình.                                                        | 12/11/2025 20:00   | 12/11/2025 23:00| |
+| 5   | Cá nhân: tham gia chuẩn bị **file docx template** (phần liên quan đến worklog và workshop), lên ý tưởng sẽ đưa lên Hugo như thế nào.                              | 12/11/2025         | 13/11/2025      |        |
 
 ### Kết quả đạt được tuần 10:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- CloudFront, Amplify, Supabase, LocalStack đã được:
+  - Đưa vào kiến trúc một cách rõ ràng hơn.
+- Kiến trúc **v9**:
+  - Rõ ràng hơn về luồng dữ liệu và vị trí từng service.
+- Bắt đầu làm quen với **Docker**:
+  - Chuẩn bị tốt cho việc đóng gói môi trường dev (LocalStack, Terraform, v.v.).
+- Template báo cáo docx:
+  - Đã có phác thảo, giúp việc viết report/Workshop sau này nhẹ hơn rất nhiều.

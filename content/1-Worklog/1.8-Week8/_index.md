@@ -5,50 +5,30 @@ chapter: false
 pre: " <b> 1.8. </b> "
 ---
 
-### Week 8 Objectives:
+### Goals for Week 8
 
-- Connect and get acquainted with members of First Cloud Journey.
-- Understand basic AWS services, how to use the console & CLI.
+- Write and complete the project **proposal**.
+- Adjust the architecture to match the proposed design.
+- Clearly assign each part of the proposal to team members.
+- Identify early the difficulties around **realtime vs batch** processing.
 
-### Tasks to be carried out this week:
+### Tasks for this week
 
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP <br>                              | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| No. | Task                                                                                                                                                                                                                       | Start Date        | End Date        | References           |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | -------------------- |
+| 1   | Team meeting: edit the proposal, divide sections (Technical Implementation, Timeline & Milestones, Budget Estimation, Risk Assessment, Expected Outcomes), discuss the difficulty of implementing a realtime solution.     | 20/10/2025 22:00  | 21/10/2025 01:40|  |
+| 2   | Follow-up meeting: refine the architecture according to feedback, update it to be consistent with the proposal, finalize the **completed proposal**.                                                                      | 21/10/2025 19:00  | 21/10/2025 23:30|  |
+| 3   | Personal: draft the **Risk Assessment** section (technical risks, cost risks, schedule risks, data risks) and propose mitigation strategies.                                        | 22/10/2025        | 23/10/2025      | |
+| 4   | Full review of the proposal: check spelling, formatting, references, and ensure logical flow before submission.                                                                     | 24/10/2025        | 25/10/2025      |   |
 
-### Week 8 Achievements:
+### Results achieved in Week 8
 
-- Understood what AWS is and mastered the basic service groups:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Successfully created and configured an AWS Free Tier account.
-
-- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-- Installed and configured AWS CLI on the computer, including:
-
-  - Access Key
-  - Secret Key
-  - Default Region
-  - ...
-
-- Used AWS CLI to perform basic operations such as:
-
-  - Check account & configuration information
-  - Retrieve the list of regions
-  - View EC2 service
-  - Create and manage key pairs
-  - Check information about running services
-  - ...
-
-- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-- ...
+- The proposal was **finalized**.
+- The architecture was updated to:
+  - Reflect the AWS services actually used.
+  - Focus on **batch-based clickstream processing**, avoiding over-complicated realtime implementation.
+- Personally:
+  - I wrote the **Risk Assessment** section and learned:
+    - Where the project is likely to fail (tech, cost, schedule, data).
+    - The importance of having backup plans, tests, and realistic scope.
+- The team now has a shared **technical “contract”** to follow in the next phases.

@@ -52,3 +52,30 @@ pre: " <b> 1.9. </b> "
 
 - Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
 - ...
+### Goals for Week 9
+
+- Have the first **offline meeting**, align on in-person collaboration.
+- Finalize **proposal on Git**, configure it to display properly.
+- Start researching **Cognito, S3, ORM** and begin **building the e-commerce website**.
+
+### Tasks for this week
+
+| Day | Task                                                                                                                                                                                         | Start Date        | End Date        | References           |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | -------------------- |
+| 1   | Offline meeting: meet the team in person, review the proposal, fix small issues, push content to Git/GitPages, and plan the next tasks.                                                     | 28/10/2025 09:00  | 28/10/2025 12:00|  |
+| 2   | Online meeting: study **Amazon Cognito & S3**, start building the web using an existing template from git, decide not to create a separate backend, revisit architecture and clickstream concept. | 29/10/2025 22:30  | 30/10/2025 00:30|   |
+| 3   | Study ORM framework used in the frontend template (models, migrations, data mapping); take notes for future database integration.                                                            | 30/10/2025        | 31/10/2025      |     |
+| 4   | Meeting: confirm that the first version of the web app is built, discuss next steps: data creation, research CloudFront, Amplify, LocalStack, standardize Python environment & libraries.    | 05/11/2025 14:15  | 05/11/2025 15:40| |
+| 5   | Personal: test basic features on the web (view products, add to cart, checkout), record UI/logic bugs and share with the team.                                                              | 06/11/2025        | 07/11/2025      |         |
+
+### Results achieved in Week 9
+
+- First **offline meetup**:
+  - Improved team communication and coordination.
+- Proposal:
+  - Pushed to Git/GitPages for easier access.
+- E-commerce web:
+  - First version built and running locally using the template.
+  - I understood the code structure and ORM workflow.
+- The team now talks more concretely about:
+  - **Cognito, S3, CloudFront, Amplify, LocalStack**, preparing for more complex infrastructure in the next weeks.

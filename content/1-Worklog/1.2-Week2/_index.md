@@ -5,100 +5,34 @@ chapter: false
 pre: " <b> 1.2. </b> "
 ---
 
-### Week 2 Objectives:
+### Goals for Week 2
 
-- Study and understand what VPC and VPN are
-- How to create, connect, and operate networking services
-- Experimentation and results
+- Understand basic networking concepts in AWS: **VPC, Subnet, Route Table, Security Group, Internet Gateway, NAT**.
+- Learn how to **control traffic flow** in and out of a VPC.
+- Practice creating a VPC, Subnets, and an EC2 instance, then test SSH connectivity.
+- Get used to reading and drawing AWS network diagrams.
 
-### Tasks to be carried out this week:
+### Tasks for this week
 
-| Day | Task                                          | Start Date | Completion Date | Reference Material                        |
-| --- | --------------------------------------------- | ---------- | --------------- | ----------------------------------------- |
-| 1   | - Learn the concepts of VPC and VPN           | 08/11/2025 | 08/11/2025      |
-| 2   | - Practice: Use AWS services with VPC and VPN | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Create **Subnets**, **Internet Gateway**    | 13/08/2025 | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create Route **Table**, **security groups** | 13/08/2025 | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Create **Route Table**, **security groups** | 13/08/2025 | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task                                                                                                                                       | Start Date | End Date   | References                                              |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | ------------------------------------------------------- |
+| 1   | Learn AWS networking basics: **VPC, CIDR, Subnet, Route Table, Internet Gateway, NAT Gateway, Security Group, NACL**.                      | 15/09/2025 | 17/09/2025 | [AWS Study Group](https://www.youtube.com/@AWSStudyGroup)  |
+| 2   | Watch demos of higher-level networking models: **VPC Peering, VPN, Direct Connect, Transit Gateway** (concept level).                      | 18/09/2025 | 18/09/2025 | [AWS Study Group](https://www.youtube.com/@AWSStudyGroup)                        |
+| 3   | Hands-on lab: create a **custom VPC** with 2 subnets (public/private), attach Internet Gateway, configure routing for each subnet.         | 19/09/2025 | 19/09/2025 |                            |
+| 4   | Launch an EC2 instance in the public subnet, attach a Security Group, test SSH from local machine (MobaXterm/Putty).                      | 20/09/2025 | 20/09/2025 |                         |
+| 5   | Draw the network diagram (by hand or with an online tool) showing VPC, subnets, EC2, IGW, and route tables that were created.             | 21/09/2025 | 21/09/2025 |                       |
 
-### Week 2 Achievements:
+### Results achieved in Week 2
 
-- Understanding VPC and VPN:
-
-  - Amazon VPC (Virtual Private Cloud): Allows you to create a private virtual network to launch AWS resources such as virtual servers and virtual networks, with dedicated management.
-  - A VPC can span multiple AZs (Availability Zones) but exists in only one Region.
-  - When creating and configuring, you must specify an **IPv4** CIDR block (mandatory), while **IPv6** is optional.
-  - Maximum: 5 VPCs per Region per Account.
-  - Purpose: Used to separate environments (Production, Dev, Test, Staging).
-  - You can divide instances into subnets, each subnet must belong to a specific AZ and be assigned a CIDR block that is a subset of the VPC’s CIDR.
-  - Each subnet reserves 5 IP addresses:
-    - **Network address** (e.g., 10.10.1.0)
-    - **Broadcast addres** (e.g., 10.10.1.255)
-    - **Router address** (10.10.1.1)
-    - **DNS address** (10.10.1.2)
-    - **Future use** (10.10.1.3)
-
-- Route Table:
-
-  - A set of routes that determine the path for network traffic.
-  - Default Route Table: Cannot be deleted, contains a single route that allows subnets in the VPC to communicate with each other. Each subnet must be associated with a route table.
-  - Custom Route Table: Can be created, but the default route cannot be removed.
-
-- ENI (Elastic Network Interface): A virtual network card attached to EC2 instances.
-
-  - Ensures network settings remain consistent even if the server is replaced.
-  - Private IP.
-  - Elastic IP.
-  - MAC address.
-
-- VPC Endpoint: Allows private connection to AWS services within the VPC without using the internet.
-  - Two types: Interface Endpoint and Gateway Endpoint.
-- VPC Security Group: A stateful virtual firewall that controls inbound and outbound traffic to AWS resources.
-
-  - Security Group rules are limited to source IP, port, and other Security Groups.
-  - Only allow rules are supported, applied to ENIs.
-
-- NACL (Network Access Control List): A stateless virtual firewall that controls inbound and outbound traffic at the subnet level.
-
-  - Rules limited by source IP and port.
-  - Applied to VPC Subnets.
-  - Default NACL allows all inbound and outbound traffic.
-
-- VPC Flow Logs: Capture information about IP traffic going into and out of the VPC.
-
-  - Logs are stored in Amazon CloudWatch Logs or S3.
-  - Does not capture packet contents.
-
-- VPC Peering: Enables direct connectivity between two VPCs, requires 1:1 peering connections, does not support overlapping IP address ranges.
-
-- Transit Gateway: A hub for interconnecting multiple VPCs.
-
-- VPN:
-
-  - Site-to-Site VPN: For hybrid models, providing continuous connectivity between on-premises and VPC.
-  - Client-to-Site VPN: Allows individual hosts to securely connect to VPC resources.
-
-  - AWS Direct Connect: Provides dedicated private connection between on-premises and AWS with latency of 20–30ms.
-
-  - Elastic Load Balancing (ELB): A managed load balancing service.
-
-  - Supports **HTTP**, **HTTPS**, **TCP** (secure), **SSL**.
-  - Can be public or private.
-
-  - Four types: **Application Load Balancer (ALB)**, **Network Load Balancer (NLB)**, **Classic Load Balancer (CLB)**, **Gateway Load Balancer (GLB)**
-
-- Practice:
-  - Search for VPC → create VPC → give it a name
-  - Choose IPv4 and enter the address **10.10.0.0/16**
-  - Create Subnets
-  - Create Internet gateways
-  - Create Security groups
-
-Create Security groups
-![anh](/images/a1.png)
-![anh](/images/a2.png)
-![anh](/images/a3.png)
-![anh](/images/a4.png)
-![anh](/images/a5.png)
-![anh](/images/a6.png)
-![anh](/images/a7.png)
+- Understood that **VPC is like a private network** in the cloud:
+  - Can differentiate between public and private subnets.
+  - Knows the role of Internet Gateway and NAT Gateway for Internet access.
+- Practiced:
+  - Creating VPCs, subnets, route tables, attaching an Internet Gateway.
+  - Launching an EC2 instance in a public subnet and connecting via SSH.
+- Started to get used to **drawing network diagrams**:
+  - Helps visualize traffic flow and security boundaries.
+  - Makes it easier to discuss and design architecture as a team.
+- This week laid the foundation for:
+  - Later deploying PostgreSQL on EC2 in a private subnet.
+  - Designing network architecture for the Clickstream project.

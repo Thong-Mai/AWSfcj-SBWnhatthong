@@ -5,50 +5,29 @@ chapter: false
 pre: " <b> 1.10. </b> "
 ---
 
-### Week 10 Objectives:
+### Goals for Week 10
 
-- Connect and get acquainted with members of First Cloud Journey.
-- Understand basic AWS services, how to use the console & CLI.
+- Revisit **CloudFront and Amplify**, decide on using LocalStack.
+- Update the architecture to fit the new design (Amplify, PostgreSQL, etc.).
+- Start using **Docker** for environment packaging and prepare the **report template**.
 
-### Tasks to be carried out this week:
+### Tasks for this week
 
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP <br>                              | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task                                                                                                                                                                                                                        | Start Date        | End Date        | References            |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | --------------------- |
+| 1   | Meeting: review CloudFront, decide to use **LocalStack Base** (to support more services, especially Cognito), switch web database to Supabase, adjust the architecture flow.                                              | 09/11/2025 20:30  | 09/11/2025      |  |
+| 2   | Discussion: list required Python libraries, check versions, update proposal so it matches the new architecture.                                                                      | 09/11/2025        | 10/11/2025      |         |
+| 3   | Meeting: study Docker, how to install libraries into the image, plan to use “Docker + LocalStack” as the standard environment; at the same time, refine architecture and Vietnamese version of documentation.              | 11/11/2025 20:00  | 11/11/2025 23:30|  |
+| 4   | Short meeting: update the architecture to **version 9**, agree on which services must be included.                                                                                   | 12/11/2025 20:00  | 12/11/2025 23:00|  |
+| 5   | Personal: help prepare the **docx template** (sections related to worklog and workshop), plan how to upload it to Hugo later.                                                        | 12/11/2025        | 13/11/2025      |           |
 
-### Week 10 Achievements:
+### Results achieved in Week 10
 
-- Understood what AWS is and mastered the basic service groups:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Successfully created and configured an AWS Free Tier account.
-
-- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-- Installed and configured AWS CLI on the computer, including:
-
-  - Access Key
-  - Secret Key
-  - Default Region
-  - ...
-
-- Used AWS CLI to perform basic operations such as:
-
-  - Check account & configuration information
-  - Retrieve the list of regions
-  - View EC2 service
-  - Create and manage key pairs
-  - Check information about running services
-  - ...
-
-- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-- ...
+- CloudFront, Amplify, Supabase, and LocalStack:
+  - Were all integrated more clearly into the updated architecture.
+- Architecture **v9**:
+  - Better reflects the data flow and roles of each service.
+- Started using **Docker**:
+  - Prepared for a standardized development environment (LocalStack, Terraform, etc.).
+- The report docx template:
+  - Basic structure created, which will make writing future reports and workshops easier.
