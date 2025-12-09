@@ -5,62 +5,137 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-# Summary Report: “Vietnam Cloud Day 2025 : Ho Chi Minh City Connect Edition for Builders.”
+## Location & Time
 
-### Event Objectives
+- **Location:** Bitexco Financial Tower  
+- **Date:** 15/11/2025  
 
-- Panel discussion: Navigating the GenAI Revolution: Strategies for Executive Leadership.
-- Track 1: GenAI And Data.
-  - Building a Unified Data Foundation on AWS for AI and Analytics Workloads.
-  - Building the Future: Gen AI Adoption and Roadmap on AWS.
-  - AI-Driven Development Lifecycle (AI-DLC) Shaping the future of Software Implementation.
-  - Securing Generative AI Applications with AWS: Fundamentals and Best Practices.
-  - Beyond Automation: AI Agents as Your Ultimate Productivity Multipliers.
+---
 
-### Speakers
+## Event Objectives
 
-- **Jun Kai Loke** – AI/ML Specialist SA, AWS.
-- **Kien Nguyen** – Solutions Architect, AWS.
-- **Tamelly Lim** – Storage Specialist SA, AWS.
-- **Binh Tran** – Senior Solutions Architect, AWS.
-- **Taiki Dang** – Solutions Architect, AWS.
-- **Michael Armentano** – Principal WW GTM Specialist, AWS.
+- Provide a **hands-on, practical** introduction to AI/ML/GenAI capabilities on AWS, with a strong focus on **Amazon Bedrock**.
+- Help participants understand how to **choose the right Foundation Model** (Claude, Llama, Titan, …) for different types of use cases.
+- Introduce key **prompt engineering** techniques (few-shot, structured prompts, reasoning patterns) to improve answer quality.
+- Explain the **RAG architecture** and how to leverage a **Knowledge Base** to increase factual accuracy.
+- Get familiar with **Bedrock Agents** for multi-step workflows with integrated tools/APIs.
+- Emphasize how to apply **Guardrails** to control content and policies, and to keep GenAI applications “safe”.
+- Watch a live demo of a complete **GenAI chatbot** built end-to-end with Amazon Bedrock.
 
-### Key Highlights
+---
 
-#### Panel discussion: Navigating the GenAI Revolution: Strategies for Executive Leadership.
+## Speakers
 
-This discussion explores how executive leaders can guide their organizations through generative AI advancements, with panelists sharing insights on fostering innovation, aligning AI with business goals, and managing organizational change during AI adoption.
+- **Hoàng Kha**  
+- **Hữu Nghị**  
+- **Hoàng Anh**
 
-#### Track 1: GenAI And Data.
+---
 
-##### Building a Unified Data Foundation on AWS for AI and Analytics Workloads.
+## Key Highlights
 
-This session explores strategies and best practices for building a unified, scalable data foundation on AWS to support AI and analytics workloads. It covers how to use AWS services for data ingestion, storage, processing, and governance, enabling organizations to manage and leverage data effectively for advanced analytics and AI applications.
+### 1. Welcome & Introduction
 
-##### Building the Future: Gen AI Adoption and Roadmap on AWS.
+- **Check-in & networking:**  
+  Participants register, check in, and have quick conversations with other builders and attendees working with AWS.
+- **Agenda overview:**  
+  Walk through the morning schedule, learning goals, and what participants can expect to take away from the workshop.
+- **Ice-breaker activity:**  
+  A short warm-up so everyone can share expectations and make the atmosphere more relaxed.
+- **Speaker introduction:**  
+  The three speakers briefly share their background and perspectives in the AI/ML/GenAI on AWS space.
 
-This session will present AWS’s overall vision, emerging trends, and strategic roadmap for adopting Generative AI (GenAI). It will focus on key AWS services and initiatives that help organizations leverage GenAI to drive innovation and efficiency.
+### 2. Generative AI with Amazon Bedrock
 
-##### AI-Driven Development Lifecycle (AI-DLC) Shaping the future of Software Implementation.
+- **Foundation Models:**  
+  Explain what Claude, Llama, Titan are, how they differ, and how to pick a model based on needs: internal support chatbot, text summarization, content classification, reasoning-heavy tasks, etc.
+- **Prompt engineering:**  
+  Practice different prompt styles:
+  - Structured prompts (context → instruction → constraints).
+  - Few-shot prompts (with sample examples).
+  - Techniques to phrase questions so that the model “understands what you want” more clearly.
+- **Reasoning patterns:**  
+  Demonstrate how to ask the model to reason step by step, or break a large problem into sub-tasks, to get more consistent results on complex tasks.
 
-The AI-Driven Development Lifecycle (AI-DLC) is an AI-centric approach that embeds AI throughout the software development process. Unlike traditional methods where AI is secondary, AI-DLC integrates AI execution with human oversight and collaboration to significantly enhance development speed, quality, and innovation.
+### 3. RAG, Agents & Guardrails
 
-##### Securing Generative AI Applications with AWS: Fundamentals and Best Practices.
+- **RAG (Retrieval-Augmented Generation):**  
+  - Separate out the retrieval step from a knowledge base.  
+  - Add the right context before asking the model to generate an answer.  
+  - Emphasize that retrieval is critical if you want correct answers based on internal knowledge.
+- **Bedrock Agents:**  
+  - Create “agents” that can call tools (APIs, search, data lookup).  
+  - Very useful for multi-step workflows like business assistants or process automation.
+- **Guardrails:**  
+  - Configure protective layers to filter sensitive content and restrict unwanted topics.  
+  - Ensure GenAI applications comply with company policies and regulations.
 
-This session examines security challenges across the generative AI stack—covering infrastructure, models, and applications—and explains how AWS uses measures like encryption, zero-trust architecture, monitoring, and access controls to protect AI workloads and ensure data confidentiality and integrity.
+### 4. Live Demo
 
-##### Beyond Automation: AI Agents as Your Ultimate Productivity Multipliers.
+- Walkthrough of building a **GenAI chatbot** on Bedrock:
+  - Choose a model.
+  - Design the prompt.
+  - Connect to a Knowledge Base using RAG.
+  - Add basic Guardrails.
+  - Test a Q&A scenario similar to a real enterprise environment.
 
-This session highlights how AI agents can act as intelligent partners, autonomously learning, adapting, and executing complex tasks to transform operations, greatly enhancing efficiency and productivity.
+---
 
-#### Some event photos
+## Key Takeaways
 
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+### 1. Design Mindset
 
-![anh](/images/e1.jpg)
-![anh](/images/e2.jpg)
-![anh](/images/e3.jpg)
-![anh](/images/e4.jpg)
-![anh](/images/e5.jpg)
-![anh](/images/e6.jpg)
+- **Start from the use case:**  
+  First clarify the problem (FAQ bot, document search assistant, process automation, …), then work backwards to choose the right model and architecture.
+- **Grounding is critical:**  
+  For systems using internal knowledge, accuracy depends heavily on how you retrieve and select context, not just on “writing a longer prompt”.
+- **Safety is not an afterthought:**  
+  Guardrails and policies should be part of the design from the beginning, instead of being patched on right before going to production.
+
+### 2. Technical Architecture
+
+- **Model selection:**  
+  Balance quality, cost, latency, and task type (chat, reasoning, summarization, etc.).
+- **Prompt engineering:**  
+  Use structured prompts plus clear examples to reduce ambiguity and make prompts easier to reuse across scenarios.
+- **RAG workflow:**  
+  - Retrieve relevant documents.  
+  - Inject context.  
+  - Generate the answer.  
+  - (Optional) log sources/context for traceability.
+- **Agents & tools:**  
+  When workflows require multiple steps or external API calls/services, Agents help automate the flow instead of hardcoding all the logic.
+- **Guardrails:**  
+  Serve as a “safety gate” to reduce content risk, especially critical when the GenAI app is user-facing.
+
+### 3. Applying to Work
+
+- **Prototype a small Bedrock chatbot:**  
+  Start with a narrow knowledge base (FAQs, internal policies) to evaluate answer quality.
+- **Build a “prompt library”:**  
+  Collect and standardize good prompts for common tasks: summarization, classification, Q&A, information extraction.
+- **Gradually add RAG:**  
+  When higher accuracy is needed, move from “prompt-only” to RAG so answers are grounded in real, up-to-date data.
+- **Use Agents intentionally:**  
+  Only introduce Agents when workflows truly need multiple steps and tool calls—to avoid unnecessary complexity.
+- **Set up guardrails & logging:**  
+  Define policies, log prompts/responses, and monitor them for continuous improvement.
+
+---
+
+## Event Experience
+
+Attending **“AI/ML/GenAI on AWS”** helped me:
+
+- Clearly see how **Amazon Bedrock** can be used to build GenAI applications that actually run in production, not just demos.
+- Go from foundational topics (model selection, prompt design) to more advanced patterns like:
+  - RAG  
+  - Agents  
+  - Guardrails
+- The live demo tied all the concepts together into a complete **end-to-end chatbot workflow**, which can be adapted to real internal-knowledge use cases inside an organization.
+
+---
+
+## Event Photos
+
+![anh](/images/event1.png) 

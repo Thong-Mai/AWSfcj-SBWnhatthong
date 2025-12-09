@@ -5,123 +5,140 @@ chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+## Location & Time
 
-### Event Objectives
+- **Location:** Bitexco Financial Tower  
+- **Date:** 17/11/2025  
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+---
 
-### Speakers
+## Event Objectives
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- Clarify the **DevOps mindset** – it’s not just tools, but a way of working between Dev and Ops.
+- Introduce the **DevOps services on AWS**: CodeCommit, CodeBuild, CodeDeploy, CodePipeline, CloudFormation/CDK, ECS/EKS, CloudWatch, X-Ray, …
+- Show how to **design a CI/CD pipeline** on AWS with different deployment strategies (blue/green, canary, rolling).
+- Explain the role of **Infrastructure as Code (IaC)** in managing infrastructure.
+- Summarize best practices for **monitoring, logging, and tracing** to operate systems reliably.
 
-### Key Highlights
+---
 
-#### Identifying the drawbacks of legacy application architecture
+## Speakers
+ 
+- **Thịnh Nguyễn**  
+- **Bảo Huỳnh**  
+- **Hoàng Long**  
+- **Trần Vĩ**
 
-- Long product release cycles → Lost revenue/missed opportunities
-- Inefficient operations → Reduced productivity, higher costs
-- Non-compliance with security regulations → Security breaches, loss of reputation
+---
 
-#### Transitioning to modern application architecture – Microservices
+## Key Highlights
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+### 1. Kick-off & DevOps Context
 
-- **Queue Management**: Handle asynchronous tasks
-- **Caching Strategy**: Optimize performance
-- **Message Handling**: Flexible inter-service communication
+- **Check-in & networking:**  
+  Participants connect and share about their current tech stack (on-prem, AWS, hybrid).
+- **High-level introduction:**  
+  Speakers recap the history of DevOps and explain why a strict separation between Dev and Ops often leads to communication gaps and delays.
+- **Problem statement:**  
+  How to increase release frequency, reduce deployment errors, and shorten recovery time when incidents happen.
 
-#### Domain-Driven Design (DDD)
+### 2. DevOps Mindset & Metrics
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts
-- **Bookstore case study**: Demonstrates real-world DDD application
-- **Context mapping**: 7 patterns for integrating bounded contexts
+- **Mindset:**  
+  - Dev and Ops share responsibility for product quality and stability.  
+  - Favor automated pipelines and small, frequent releases.
+- **Metrics:**  
+  - DORA metrics (Deployment Frequency, Lead Time, Change Failure Rate, Time to Restore).  
+  - MTTR – viewed from a business impact perspective, not just technically.
+- **Meaning:**  
+  Use numbers to evaluate the process instead of debating based on gut feeling.
 
-#### Event-Driven Architecture
+### 3. CI/CD on AWS
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming
-- **Benefits**: Loose coupling, scalability, resilience
-- **Sync vs async comparison**: Understanding the trade-offs
+- **Core tools:**
+  - **CodeCommit**: Git repository.  
+  - **CodeBuild**: automated build/test.  
+  - **CodeDeploy**: deployment to EC2/ECS/Lambda with different strategies.  
+  - **CodePipeline**: the “backbone” that connects all CI/CD stages.
+- **Deployment strategies:**
+  - **Blue/Green:** run 2 “colors” in parallel and switch traffic after validating the new version.  
+  - **Canary:** send a small fraction of traffic to the new version first.  
+  - **Rolling:** update groups of servers gradually so the system doesn’t go fully down.
+- **Pipeline demo:**  
+  A simple pipeline from commit → build → test → deploy is demonstrated end-to-end.
 
-#### Compute Evolution
+### 4. Infrastructure as Code & Containers
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria for appropriate choice
+- **CloudFormation & CDK:**
+  - CloudFormation: define infrastructure using YAML/JSON templates.  
+  - CDK: define infrastructure using code (TypeScript/Python/…) → easier modularization and reuse.
+- **Containers on AWS:**
+  - **ECR:** image registry with security scanning and lifecycle policies.  
+  - **ECS/EKS:** two main ways to run containers (managed vs full Kubernetes).  
+  - **App Runner:** suitable for simple web apps/containers with minimal configuration.
+- **Lesson learned:**  
+  Once infrastructure is treated as code, cloning environments (dev, staging, prod) becomes more consistent and less error-prone.
 
-#### Amazon Q Developer
+### 5. Monitoring & Observability
 
-- **SDLC automation**: From planning to maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+- **CloudWatch:**
+  - Collects metrics (CPU, RAM, latency, …), logs, and custom metrics.  
+  - Creates alarms and sends notifications via SNS.
+- **X-Ray:**
+  - Traces requests across multiple services, helping you “see through” microservices.
+- **Observability:**
+  - Combine metrics + logs + traces to reduce the time spent investigating incidents.
 
-### Key Takeaways
+---
 
-#### Design Mindset
+## Key Takeaways
 
-- **Business-first approach**: Always start from the business domain, not the technology
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams
-- **Bounded contexts**: Identifying and managing complexity in large systems
+### 1. DevOps Mindset
 
-#### Technical Architecture
+- Focus on the **value stream** rather than job titles.  
+- Use data to measure and optimize the pipeline instead of relying on intuition.
 
-- **Event storming technique**: Practical method for modeling business processes
-- Use **event-driven communication** instead of synchronous calls
-- **Integration patterns**: When to use sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless
+### 2. Pipeline Design
 
-#### Modernization Strategy
+- A good pipeline should:
+  - Automate as many repetitive steps as possible.  
+  - Include test stages and a staging environment before production.  
+  - Have a clear rollback mechanism (especially with blue/green or canary deployments).
 
-- **Phased approach**: No rushing — follow a clear roadmap
-- **7Rs framework**: Multiple modernization paths depending on the application
-- **ROI measurement**: Cost reduction + business agility
+### 3. IaC & Containers
 
-### Applying to Work
+- Infrastructure should:
+  - Be fully described with CloudFormation/CDK → version control, code review.  
+  - Be validated (lint, template validation) before apply.
+- Containers help:
+  - Keep dev/test/prod environments similar, reducing “works on my machine” issues.
 
-- **Apply DDD** to current projects: Event storming sessions with business teams
-- **Refactor microservices**: Use bounded contexts to define service boundaries
-- **Implement event-driven patterns**: Replace some sync calls with async messaging
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity
+### 4. Monitoring is Mandatory
 
-### Event Experience
+- Without monitoring, it’s very hard to practice DevOps properly.  
+- Alerts should be designed around **user experience** (error rate, latency, downtime), not just “CPU is high/low”.
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+---
 
-#### Learning from highly skilled speakers
+## Applying to Work
 
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.
+- Start building a **minimal CI/CD pipeline** for your project (even for personal projects).
+- Try to describe your current infrastructure with **CloudFormation/CDK**, even at small scale.
+- Set up basic CloudWatch Alarms:
+  - API 5xx, latency, EC2 CPU usage, build pipeline failures, etc.
+- Gradually standardize your deployment process:
+  - Move away from “ssh into a server and run commands manually”.
 
-#### Hands-on technical exposure
+---
 
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.
+## Event Experience
 
-#### Leveraging modern tools
+The “DevOps on AWS” event helped me:
 
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.
+- Connect fragmented knowledge about CI/CD, IaC, containers, and monitoring into **one coherent big picture**.  
+- See clearly that DevOps on AWS is not just a bunch of separate services, but can be combined into a **single, continuous pipeline from code to production**.  
+- Gain more motivation to apply proper DevOps practices to both my personal projects and my clickstream analytics project.
 
-#### Networking and discussions
+---
 
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.
-
-#### Lessons learned
-
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.
-
-#### Some event photos
-
-_Add your event photos here_
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+## Event Photos

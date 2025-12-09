@@ -1,8 +1,8 @@
 ---
-title: "Worklog Tuần 12"
+title: "Worklog Tuần 13"
 weight: 2
 chapter: false
-pre: " <b> 1.12 </b> "
+pre: " <b> 1.13 </b> "
 ---
 
 ### Mục tiêu cần làm tuần 13:

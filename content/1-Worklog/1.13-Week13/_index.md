@@ -1,8 +1,8 @@
 ---
-title: "Week 12 Worklog"
+title: "Week 13 Worklog"
 weight: 2
 chapter: false
-pre: " <b> 1.12. </b> "
+pre: " <b> 1.13. </b> "
 ---
 
 ### Goals for Week 13
