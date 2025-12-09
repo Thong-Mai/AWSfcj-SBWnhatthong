@@ -357,3 +357,5 @@ With these analytical results, businesses can:
 - Evaluate the effectiveness of marketing initiatives through measurable engagement and conversion indicators
 
 As a result, marketing and sales strategies become more evidence-based and precise, supporting better decision-making and improved business performance.
+
+## File TEMPLETE DOCX: [Tải Proposal (DOCX)](/docx/Proposal_File.docx)
