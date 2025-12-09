@@ -3,13 +3,11 @@ title: "Blog 2"
 weight: 1
 chapter: false
 pre: " <b> 3.2. </b> "
----
+--- 
 
 # Introducing Local Device Emulator for Verbatim Circuits on Amazon Braket
 
 by Mao Lin, Ammar Ali, Cody Wang, and Altan Nagji | on 26 AUG 2025 | in [Amazon Braket](https://aws.amazon.com/braket/), [Quantum Technologies](https://aws.amazon.com/blogs/quantum-computing/category/quantum-technologies/) | [Permalink](https://aws.amazon.com/blogs/quantum-computing/introducing-local-device-emulator-for-verbatim-circuits-on-amazon-braket/)
-
-![anh](/images/C47-1.png)
 
 In this post, we introduce the **local device emulator** in **Amazon Braket**, a feature that lets you emulate **verbatim circuits** using calibration data taken from a real quantum processing unit (QPU). With this emulator, you can quickly check whether a circuit is compatible with a device and estimate how it behaves under realistic hardware noise before submitting a task to the QPU.
 
@@ -79,7 +77,7 @@ Once an emulator is available, you can use it to verify that a verbatim circuit 
 
 For the examples below, we again target the Rigetti Ankaa-3 device, whose qubits are numbered 0–83 and arranged in a fixed connectivity pattern.
 
-![anh](/images/C47-2.png)
+![anh](/images/image001-1.png)
 
 ### Example 1 – Invalid qubit index
 
@@ -176,7 +174,7 @@ noisy_circuit = ankaa3_emulator.transform(valid_circuit)
 print(noisy_circuit)
 ```
 
-![anh](/images/C47-3.png)
+![anh](/images/image002-1.png)
 
 The transformed circuit contains additional noise operations – for example, depolarizing channels after one- and two-qubit gates and bit-flip channels before measurements. This gives a more realistic, device-specific noise model than a noiseless simulation.
 
@@ -185,7 +183,7 @@ To compare results quantitatively, the blog defines a **fidelity** between two d
 - The fidelity between **hardware** and **noiseless** simulation is high.  
 - The fidelity between **hardware** and the **local device emulator** is even higher.
 
-![anh](/images/C47-4.png)
+![anh](/images/image003-2.png)
 
 This indicates that the local device emulator provides outcome distributions that are closer to those of the real QPU than a noiseless simulator does, making it a powerful tool for designing and tuning **noise-resilient quantum algorithms**.
 
@@ -212,25 +210,25 @@ To learn more and experiment with local device emulation:
 
 ---
 
-![anh](/images/C47-5.png)
+![anh](/images/MaoLin.jpg)
 
 ### Mao Lin
 
 Mao Lin is a Scientist on the Amazon Braket team. His research background is in theoretical condensed matter physics, with a focus on topological phases of matter. He received his PhD in Physics from the University of Illinois and his BS in Physics from the National University of Singapore.
 
-![anh](/images/C47-6.png)
+![anh](/images/image009.jpg)
 
 ### Ammar Ali
 
 Ammar Ali was an Applied Scientist Intern at Amazon Braket. He is a PhD candidate at Purdue University, where he works on quantum simulations of condensed-matter systems. Outside of work, he enjoys building custom keyboards and playing racket sports.
 
-![anh](/images/C47-7.png)
+![anh](/images/image013.jpg)
 
 ### Cody Wang
 
 Cody Wang is a Software Development Engineer at Amazon Braket. He works on open-source libraries for writing and running quantum programs, as well as integrations with popular quantum-computing frameworks. Cody holds a BASc from the University of Toronto and is a math enthusiast, avid pianist, and sushi fan.
 
-![anh](/images/C47-8.png)
+![anh](/images/image008.jpg)
 
 ### Altan Nagji
 

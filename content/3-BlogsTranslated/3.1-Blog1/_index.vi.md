@@ -9,8 +9,6 @@ pre: " <b> 3.1. </b> "
 
 by Channy Yun (윤석찬) | vào ngày 26 tháng 8 năm 2025 | trong [Announcements](https://aws.amazon.com/blogs/aws/category/news/announcements/), [Events](https://aws.amazon.com/blogs/aws/category/news/events/), [News](https://aws.amazon.com/blogs/aws/category/news/) | [Liên kết cố định](https://aws.amazon.com/blogs/aws/aws-services-scale-to-new-heights-for-prime-day-2025-key-metrics-and-milestones/)
 
-![anh](/images/C46-1.png)
-
 Amazon Prime Day 2025 là sự kiện mua sắm Amazon Prime Day lớn nhất từ trước đến nay, lập kỷ lục cả về khối lượng bán hàng và tổng số mặt hàng được bán ra trong sự kiện kéo dài 4 ngày. Các thành viên Prime đã tiết kiệm được hàng tỷ đô la khi mua sắm hàng triệu ưu đãi của Amazon trong sự kiện này.  
 
 Năm nay đánh dấu một sự chuyển đổi đáng kể trong trải nghiệm Prime Day thông qua những tiến bộ trong các sản phẩm **generative AI** từ Amazon và AWS. Khách hàng đã sử dụng **Alexa+** — trợ lý cá nhân thế hệ tiếp theo của Amazon hiện đã có sẵn trong chương trình truy cập sớm cho hàng triệu khách hàng — cùng với trợ lý mua sắm do AI hỗ trợ **Rufus** và **AI Shopping Guides**.  
@@ -19,7 +17,7 @@ Những tính năng này, được xây dựng trên 15 năm kinh nghiệm đổ
 
 Là một phần trong truyền thống hàng năm của chúng tôi để kể cho bạn nghe về cách AWS đã cung cấp năng lượng cho Prime Day để đạt được doanh số kỷ lục, tôi muốn chia sẻ các dịch vụ và những chỉ số đứng đầu bảng xếp hạng từ AWS đã giúp trải nghiệm mua sắm tuyệt vời của bạn trở nên khả thi.
 
-![anh](/images/C46-2.png)
+![anh](/images/2025-prime-days-powered-by-aws.jpg) 
 
 ## Prime Day 2025 – tất cả các con số
 
@@ -29,7 +27,7 @@ Trong những tuần trước các sự kiện mua sắm lớn như Prime Day, c
 
 Trong Prime Day 2025, AWS Outposts tại một trong những trung tâm hoàn thiện đơn hàng lớn nhất của Amazon đã gửi hơn **524 triệu** lệnh đến hơn **7.000** robot, đạt khối lượng cao nhất là **8 triệu lệnh mỗi giờ** — tăng **160%** so với Prime Day 2024.
 
-![anh](/images/C46-3.png)
+![anh](/images/2025-amazon-primeday-robots.jpg)
 
 Dưới đây là một số chỉ số thú vị và đáng kinh ngạc hơn:
 
@@ -71,13 +69,11 @@ Chương trình hỗ trợ toàn diện này giúp đánh giá sự sẵn sàng 
 
 Tôi mong chờ được xem những kỷ lục nào khác sẽ bị phá vỡ vào năm tới!
 
-![anh](/images/C46-4.png)
+---
 
 — Channy
 
----
-
-![anh](/images/C46-5.png)
+![anh](/images/channyun_400x400.jpg)
 
 ### Channy Yun (윤석찬)
 

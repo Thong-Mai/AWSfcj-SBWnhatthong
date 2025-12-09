@@ -9,7 +9,6 @@ pre: " <b> 3.3. </b> "
 
 by Sejun Kim, Arne Knoeller, Thuan Bui Thi, and Whye Loong Wong | vào ngày 26 tháng 8 năm 2025 | trong [AWS PrivateLink](https://aws.amazon.com/privatelink/), [SAP on AWS](https://aws.amazon.com/sap/), [Best Practices](https://aws.amazon.com/blogs/awsforsap/) | [Liên kết cố định](https://aws.amazon.com/blogs/awsforsap/secure-sap-hanacloud-connectivity-using-aws-privatelink/)
 
-![anh](/images/C48-1.png)
 
 ## Giới thiệu
 
@@ -23,11 +22,12 @@ Bài viết này trình bày cách tăng cường **bảo mật đường truy�
 
 Các instance SAP HANA Cloud trên AWS chạy trên hạ tầng **Amazon EC2 dùng AWS Graviton**. So với các instance x86 tương đương, Graviton mang lại tỷ lệ **price–performance** tốt hơn cho analytical workload, giảm chi phí compute và mức tiêu thụ năng lượng, từ đó giúp giảm **carbon footprint** của các deployment SAP HANA Cloud. Khách hàng chạy SAP HANA Cloud trên AWS sẽ hưởng lợi trực tiếp từ cải thiện hiệu năng và yếu tố bền vững này.
 
-![anh](/images/C48-2.png)
 
 ## Kết nối tới SAP HANA Cloud trên AWS
 
 Theo mặc định, ứng dụng kết nối tới SAP HANA Cloud thông qua một **endpoint công khai trên internet**. Client từ on‑premises hoặc các cloud khác gửi lưu lượng qua internet, được bảo vệ bằng TLS, để truy cập cơ sở dữ liệu.
+
+![anh](/images/figure_01.png)
 
 Tuy nhiên, khách hàng trong các ngành chịu quy định nghiêm ngặt (tài chính, y tế, khu vực công, v.v.) thường có chính sách **không cho phép** truy cập trực tiếp qua public endpoint, kể cả khi đã mã hóa. Các tổ chức này thường yêu cầu:
 
@@ -36,8 +36,6 @@ Tuy nhiên, khách hàng trong các ngành chịu quy định nghiêm ngặt (t�
 - Phân tách rõ ràng giữa traffic ứng dụng và traffic quản trị.
 
 Để đáp ứng các yêu cầu đó, SAP và AWS hỗ trợ kết nối SAP HANA Cloud thông qua **AWS PrivateLink**, giúp lưu lượng luôn nằm trên backbone AWS và expose database vào VPC của bạn thông qua **interface endpoint private**.
-
-![anh](/images/C48-3.png)
 
 ## AWS PrivateLink là gì?
 
@@ -52,7 +50,7 @@ Một số đặc điểm chính:
 
 Khi SAP HANA Cloud được publish như một endpoint service và VPC của bạn kết nối tới nó thông qua interface endpoint, các client bên trong VPC (và các môi trường kết nối như on‑premises qua AWS Direct Connect hoặc VPN) có thể truy cập SAP HANA Cloud bằng **kết nối IP private**.
 
-![anh](/images/C48-4.png)
+![anh](/images/figure_02.png)
 
 ## Các use case tiêu biểu với SAP HANA Cloud và AWS PrivateLink
 
@@ -70,7 +68,7 @@ Với AWS PrivateLink:
 
 Mẫu kiến trúc này cung cấp mức bảo mật cấp doanh nghiệp cho traffic của admin và developer trong khi vẫn giữ nguyên đường đi của traffic ứng dụng thông thường.
 
-![anh](/images/C48-5.png)
+![anh](/images/figure_03.png)
 
 ### Use case 2 – Tích hợp data platform trên AWS một cách an toàn
 
@@ -85,7 +83,7 @@ Trong cả hai pattern, AWS PrivateLink đảm bảo rằng:
 - Không có public IP hay internet gateway nào nằm trên đường đi của dữ liệu.  
 - Các yêu cầu bảo mật và tuân thủ cho dữ liệu nghiệp vụ nhạy cảm được đáp ứng dễ dàng hơn.
 
-![anh](/images/C48-6.png)
+![anh](/images/figure_04.png)
 
 ## Thiết lập SAP HANA Cloud với AWS PrivateLink – mức tổng quan
 
@@ -111,7 +109,7 @@ Trong SAP HANA Cloud Central:
 
 Thiết lập này tạo ra một hoặc nhiều **PrivateLink endpoint service ID** mà bạn sẽ dùng khi tạo VPC endpoint.
 
-![anh](/images/C48-7.png)
+![anh](/images/figure_05.png)
 
 ### Bước 2 – Tạo interface VPC endpoint
 
@@ -129,7 +127,7 @@ Khi endpoint đạt trạng thái **Available**, hãy ghi lại:
 - **DNS name** – sẽ cấu hình trong Route 53.  
 - **Private IP address** – hữu ích cho việc kiểm tra và troubleshooting mạng.
 
-![anh](/images/C48-8.png)
+![anh](/images/figure_09.png)
 
 ### Bước 3 – Thêm VPC endpoint vào allow list của SAP HANA Cloud
 

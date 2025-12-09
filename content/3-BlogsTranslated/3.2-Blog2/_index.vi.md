@@ -3,13 +3,11 @@ title: "Blog 2"
 weight: 1
 chapter: false
 pre: " <b> 3.2. </b> "
----
+--- 
 
 # Giới thiệu Local Device Emulator cho Verbatim Circuits trên Amazon Braket
 
 by Mao Lin, Ammar Ali, Cody Wang, and Altan Nagji | vào ngày 26 tháng 8 năm 2025 | trong [Amazon Braket](https://aws.amazon.com/braket/), [Quantum Technologies](https://aws.amazon.com/blogs/quantum-computing/category/quantum-technologies/) | [Liên kết cố định](https://aws.amazon.com/blogs/quantum-computing/introducing-local-device-emulator-for-verbatim-circuits-on-amazon-braket/)
-
-![anh](/images/C47-1.png)
 
 Trong bài viết này, chúng tôi giới thiệu **local device emulator** trên **Amazon Braket** – một tính năng cho phép bạn mô phỏng (**emulate**) các **verbatim circuits** bằng cách sử dụng calibration data lấy từ một quantum processing unit (QPU) thực. Nhờ emulator này, bạn có thể nhanh chóng kiểm tra circuit có tương thích với thiết bị hay không và ước lượng hành vi của nó dưới tác động của nhiễu phần cứng thực tế, trước khi gửi task lên QPU.
 
@@ -79,7 +77,7 @@ Sau khi có emulator, bạn có thể dùng nó để đảm bảo một verbati
 
 Trong các ví dụ bên dưới, chúng ta tiếp tục dùng thiết bị Rigetti Ankaa-3, với qubit đánh số từ 0 đến 83 và được sắp xếp theo một connectivity cố định.
 
-![anh](/images/C47-2.png)
+![anh](/images/image001-1.png)
 
 ### Ví dụ 1 – Qubit index không hợp lệ
 
@@ -176,7 +174,7 @@ noisy_circuit = ankaa3_emulator.transform(valid_circuit)
 print(noisy_circuit)
 ```
 
-![anh](/images/C47-3.png)
+![anh](/images/image002-1.png)
 
 Circuit sau khi transform sẽ chứa thêm các thao tác noise – ví dụ, depolarizing channel sau các one-qubit và two-qubit gate, cùng các bit-flip channel trước thao tác đo. Điều này mang lại một noise model mang tính đặc thù thiết bị (device-specific) và thực tế hơn nhiều so với mô phỏng noiseless.
 
@@ -185,7 +183,7 @@ Circuit sau khi transform sẽ chứa thêm các thao tác noise – ví dụ, d
 - Fidelity giữa **hardware** và mô phỏng **noiseless** là khá cao.  
 - Fidelity giữa **hardware** và **local device emulator** còn cao hơn nữa.
 
-![anh](/images/C47-4.png)
+![anh](/images/image003-2.png)
 
 Điều này cho thấy local device emulator tạo ra phân phối kết quả gần với QPU thật hơn so với noiseless simulator, từ đó trở thành công cụ mạnh mẽ để thiết kế và hiệu chỉnh các **noise-resilient quantum algorithms**.
 
@@ -212,25 +210,25 @@ Bằng cách chuyển phần lớn quá trình debug và tinh chỉnh sang môi 
 
 ---
 
-![anh](/images/C47-5.png)
+![anh](/images/MaoLin.jpg)
 
 ### Mao Lin
 
 Mao Lin là Scientist trong đội Amazon Braket. Nền tảng nghiên cứu của anh là vật lý chất ngưng tụ lý thuyết, với trọng tâm là các topological phases of matter. Anh nhận bằng Tiến sĩ Vật lý tại University of Illinois và bằng Cử nhân Vật lý tại National University of Singapore.
 
-![anh](/images/C47-6.png)
+![anh](/images/image009.jpg)
 
 ### Ammar Ali
 
 Ammar Ali là Applied Scientist Intern tại Amazon Braket. Anh hiện là nghiên cứu sinh Tiến sĩ tại Purdue University, nơi anh nghiên cứu các bài toán quantum simulation cho hệ chất ngưng tụ. Ngoài công việc, anh thích tự lắp bàn phím cơ và chơi các môn thể thao dùng vợt.
 
-![anh](/images/C47-7.png)
+![anh](/images/image013.jpg)
 
 ### Cody Wang
 
 Cody Wang là Software Development Engineer tại Amazon Braket. Anh làm việc trên các thư viện mã nguồn mở dùng để viết và chạy quantum programs, cũng như các integration với những framework quantum computing phổ biến. Cody tốt nghiệp BASc tại University of Toronto, yêu thích toán học, chơi piano và đặc biệt là sushi.
 
-![anh](/images/C47-8.png)
+![anh](/images/image008.jpg)
 
 ### Altan Nagji
 

@@ -16,3 +16,9 @@ The blog introduces a new local device emulator in Amazon Braket that allows dev
 ### [Blog 3 - Secure SAP HANA Cloud connectivity using AWS PrivateLink](3.3-Blog3/)
 
 The blog describes how to secure connectivity to SAP HANA Cloud on AWS by integrating it with AWS PrivateLink. Instead of exposing SAP HANA Cloud over public endpoints, customers can create private VPC interface endpoints and Route 53 private hosted zones so that all database traffic stays within the AWS network. The post covers common use cases such as secure administrative access and secure data platform integration with services like AWS Glue and Amazon Athena, then walks through configuration steps (enabling PrivateLink in SAP HANA Cloud, creating VPC endpoints, DNS setup, and testing). It also discusses high availability patterns and cost considerations for PrivateLink-based architectures.  
+
+#### Content
+
+1. **[3.1-Blog1](3.1-Blog1/)**  
+2. **[3.2-Blog2](3.2-Blog2/)**  
+2. **[3.3-Blog3](3.3-Blog3/)** 

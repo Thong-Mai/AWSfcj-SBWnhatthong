@@ -9,8 +9,6 @@ pre: " <b> 3.1. </b> "
 
 by Channy Yun (윤석찬) | on 26 AUG 2025 | in [Announcements](https://aws.amazon.com/blogs/aws/category/news/announcements/), [Events](https://aws.amazon.com/blogs/aws/category/news/events/), [News](https://aws.amazon.com/blogs/aws/category/news/) | [Permalink](https://aws.amazon.com/blogs/aws/aws-services-scale-to-new-heights-for-prime-day-2025-key-metrics-and-milestones/)
 
-![anh](/images/C46-1.png)
-
 [Amazon Prime Day 2025](https://www.aboutamazon.com) was the biggest Prime Day shopping event so far, setting new records for both total sales and the number of items purchased during the four-day promotion. Prime members saved billions of dollars while browsing and buying from millions of deals.
 
 This year, the Prime Day experience was significantly reshaped by advances in [generative AI from Amazon and AWS](https://www.aboutamazon.com). Customers interacted with [Alexa+](https://www.aboutamazon.com), the next-generation personal assistant available in early access to millions of users, the AI-powered shopping assistant [Rufus](https://www.aboutamazon.com), and [AI Shopping Guides](https://www.aboutamazon.com).
@@ -19,7 +17,7 @@ These capabilities are built on more than 15 years of AWS cloud innovation and m
 
 As in previous years, AWS is sharing a behind-the-scenes look at how our cloud services powered Prime Day at massive scale. Below are some of the services and headline metrics that made this year’s record-breaking event possible.
 
-![anh](/images/C46-2.png)
+![anh](/images/2025-prime-days-powered-by-aws.jpg) 
 
 ## Prime Day 2025 – all the numbers
 
@@ -29,7 +27,7 @@ In the weeks leading up to major shopping events such as Prime Day, Amazon fulfi
 
 During Prime Day 2025, AWS Outposts at one of the largest Amazon fulfillment centers sent more than **524 million** commands to over **7,000** robots. At peak, the system handled **8 million commands per hour**, an increase of about **160%** compared to Prime Day 2024.
 
-![anh](/images/C46-3.png)
+![anh](/images/2025-amazon-primeday-robots.jpg)
 
 Here are additional eye-catching metrics from key AWS services:
 
@@ -73,13 +71,14 @@ We have expanded AWS Countdown to include:
 - **Migration and modernization assistance**, including [mainframe modernization](https://aws.amazon.com/mainframe-modernization/) and other large-scale transformation efforts.
 - **Infrastructure optimization** for specialized domains such as [election systems](https://aws.amazon.com/solutions/case-studies/elections/), [retail operations](https://aws.amazon.com/retail/), [healthcare services](https://aws.amazon.com/health/), and [sports and gaming events](https://aws.amazon.com/sports/).
 
-![anh](/images/C46-4.png)
 
-We are excited to see what new records our customers will set in the coming years as they build on AWS.
+I look forward to seeing what other records will be broken next year!
 
 ---
 
-![anh](/images/C46-5.png)
+— Channy
+
+![anh](/images/channyun_400x400.jpg)
 
 ### Channy Yun (윤석찬)
 

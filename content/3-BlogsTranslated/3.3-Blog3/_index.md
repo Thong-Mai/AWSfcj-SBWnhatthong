@@ -9,8 +9,6 @@ pre: " <b> 3.3. </b> "
 
 by Sejun Kim, Arne Knoeller, Thuan Bui Thi, and Whye Loong Wong | on 26 AUG 2025 | in [AWS PrivateLink](https://aws.amazon.com/privatelink/), [SAP on AWS](https://aws.amazon.com/sap/), [Best Practices](https://aws.amazon.com/blogs/awsforsap/) | [Permalink](https://aws.amazon.com/blogs/awsforsap/secure-sap-hanacloud-connectivity-using-aws-privatelink/)
 
-![anh](/images/C48-1.png)
-
 ## Introduction
 
 Modern enterprises need database platforms that can serve both **transactional** and **analytical** workloads while still meeting strict security and compliance requirements. **SAP HANA Cloud on AWS**, a key service in the SAP Business Technology Platform (SAP BTP), addresses these needs as a fully managed, cloud‑native database-as-a-service.
@@ -23,11 +21,11 @@ This post shows how to harden the **network path** to SAP HANA Cloud by integrat
 
 SAP HANA Cloud instances on AWS run on **AWS Graviton–based Amazon EC2** infrastructure. Compared to similar x86 instances, Graviton delivers better price–performance for analytical workloads, lowers compute cost and energy consumption, and helps reduce the carbon footprint of SAP HANA Cloud deployments. Customers running SAP HANA Cloud on AWS benefit directly from these performance and sustainability improvements.
 
-![anh](/images/C48-2.png)
-
 ## Connecting to SAP HANA Cloud on AWS
 
 By default, applications connect to SAP HANA Cloud using an **internet‑accessible endpoint**. Clients from on‑premises networks or from other clouds send traffic over the public internet, secured using TLS, to reach the database.
+
+![anh](/images/figure_01.png)
 
 However, customers in highly regulated industries (such as financial services, healthcare, or public sector) often have policies that disallow direct access over public endpoints, even when encryption is used. These organizations want:
 
@@ -36,8 +34,6 @@ However, customers in highly regulated industries (such as financial services, h
 - Clear separation between user traffic and administrative access.
 
 To meet these requirements, SAP and AWS support connecting SAP HANA Cloud through **AWS PrivateLink**, which keeps the traffic on the AWS backbone and exposes the database to your VPC using **private interface endpoints**.
-
-![anh](/images/C48-3.png)
 
 ## What is AWS PrivateLink?
 
@@ -52,7 +48,7 @@ Key characteristics:
 
 When SAP HANA Cloud is published as an endpoint service and your VPC connects to it via an interface endpoint, clients inside that VPC (and connected environments such as on‑premises via AWS Direct Connect or VPN) can reach SAP HANA Cloud using private IP connectivity.
 
-![anh](/images/C48-4.png)
+![anh](/images/figure_02.png)
 
 ## SAP HANA Cloud and AWS PrivateLink – example use cases
 
@@ -70,7 +66,7 @@ With AWS PrivateLink:
 
 This pattern enables enterprise‑grade security for administrator and developer traffic while keeping standard application traffic routes unchanged.
 
-![anh](/images/C48-5.png)
+![anh](/images/figure_03.png)
 
 ### Use case 2 – Secure data platform integration on AWS
 
@@ -85,7 +81,7 @@ In both patterns, AWS PrivateLink ensures that:
 - No public IPs or internet gateways are involved in the data‑in‑motion path.  
 - Security and compliance requirements for sensitive business data can be met more easily.
 
-![anh](/images/C48-6.png)
+![anh](/images/figure_04.png)
 
 ## High-level setup – SAP HANA Cloud with AWS PrivateLink
 
@@ -111,7 +107,7 @@ From SAP HANA Cloud Central:
 
 This configuration exposes one or more **PrivateLink endpoint service IDs** that you will reference when creating the VPC endpoint.
 
-![anh](/images/C48-7.png)
+![anh](/images/figure_05.png)
 
 ### Step 2 – Create the interface VPC endpoint
 
@@ -129,7 +125,7 @@ Once the endpoint status is **Available**, note:
 - The **DNS names** – later referenced by Route 53.  
 - The **private IP addresses** – useful for network troubleshooting.
 
-![anh](/images/C48-8.png)
+![anh](/images/figure_09.png)
 
 ### Step 3 – Allow the VPC endpoint in SAP HANA Cloud
 
