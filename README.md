@@ -1,1 +1,2 @@
-Thong dep trai
+https://thong-mai.github.io/AWSfcj-SBWnhatthong/
+https://thong-mai.github.io/AWSfcj-SBWnhatthong/
