@@ -30,8 +30,9 @@ chapter : false
 
 ### Content
  1. [Worklog ](1-worklog/)
- 2. [Preparation](2-prerequiste/)
- 3. [Connect to EC2 instance](3-accessibilitytoinstances/)
- 4. [Manage session logs](4-s3log/)
- 5. [Port Forwarding](5-Portfwd/)
- 6. [Clean up resources](6-cleanup/)
+ 2. [Proposal](2-Proposal/)
+ 3. [BlogsTranslated](3-BlogsTranslated/)
+ 4. [EventParticipated](4-EventParticipated/)
+ 5. [Workshop](5-Workshop/)
+ 6. [Self-evaluation](6-Self-evaluation/)
+ 7. [Feedback](7-Feedback/)

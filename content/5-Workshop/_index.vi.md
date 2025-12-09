@@ -83,9 +83,9 @@ Nền tảng được thiết kế với các tiêu chí:
 
 #### Bản đồ nội dung
 
-1. **[5.1. Objectives & Scope](5.1-objectives--scope/)**  
-2. **[5.2. Architecture Walkthrough](5.2-architecture-walkthrough/)**  
-3. **[5.3. Implementing Clickstream Ingestion](5.3-implementing-clickstream-ingestion/)**  
-4. **[5.4. Building the Private Analytics Layer](5.4-building-private-analytics-layer/)**  
-5. **[5.5. Visualizing Analytics with Shiny Dashboards](5.5-visualizing-analytics-with-shiny-dashboards/)**  
-6. **[5.6. Summary & Clean up](5.6-summary-cleanup/)**
+1. **[5.1. Mục tiêu & Phạm vi](5.1-objectives--scope/)**  
+2. **[5.2. Giới thiệu kiến trúc](5.2-architecture-walkthrough/)**  
+3. **[5.3. Triển khai hệ thống thu thập Clickstream](5.3-implementing-clickstream-ingestion/)**  
+4. **[5.4. Xây dựng lớp phân tích dữ liệu private](5.4-building-private-analytics-layer/)**
+5. **[5.5. Trực quan hóa phân tích với Shiny Dashboards](5.5-visualizing-analytics-with-shiny-dashboards/)**  
+6. **[5.6. Tổng kết & Dọn dẹp](5.6-summary-cleanup/)**
