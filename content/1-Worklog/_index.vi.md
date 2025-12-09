@@ -32,3 +32,5 @@ Thông thường và cũng là tiêu chuẩn, một worklog được thực hi�
 **Tuần 11:** [Làm công việc M...](1.11-week11/)
 
 **Tuần 12:** [Làm công việc N...](1.12-week12/)
+
+**Tuần 13:** [Làm công việc N...](1.13-week13/)

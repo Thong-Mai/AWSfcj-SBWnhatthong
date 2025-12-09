@@ -5,7 +5,7 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Team Super Beast Warrior(SBW) 
+# Team Super Beast Warrior(SBW)
 
 # Batch-based Clickstream Analytics Platform
 
@@ -16,11 +16,11 @@ The system collects user interaction data (such as clicks, searches, and page vi
 
 The processed data is visualized through **R Shiny dashboards**, providing store owners with business insights such as customer behavior patterns, product popularity, and website engagement trends.
 
-This architecture focuses on **batch analytics**, **ETL pipeline**s, and **business intelligence** while ensuring **security**, **scalability**, and **cost efficiency** by leveraging AWS managed services.
+This architecture focuses on **batch analytics**, **ETL pipeline**s, and **business intelligence** while ensuring **security**, **scalability**, and **cost efficiency** by leveraging **AWS managed services**.
 
 ### 2. Problem Statement
 
-### What’s the Problem?
+#### What’s the Problem?
 
 E-commerce websites generate a large volume of **clickstream data—including** product views, cart actions, and search activities—that contain valuable business insights.
 
@@ -33,13 +33,13 @@ As a result, they face difficulties in:
 - Optimizing marketing campaigns and website performance
 - Making data-driven inventory and pricing decisions
 
-### The Solution
+#### The Solution
 
 This project introduces an **AWS-based batch clickstream analytics** system that automatically collects user interaction data from the website every hour, processes it through serverless functions, and stores it in a central data warehouse on **Amazon EC2**.
 
 The results are visualized using **R Shiny dashboards**, enabling store owners to gain actionable insights into customer behavior and improve overall business performance.
 
-### Benefits and Return on Investment
+#### Benefits and Return on Investment
 
 - **Data-driven decision making**: Discover customer preferences, popular products, and shopping trends.
 - **Scalable and modular design**: Easily extendable to handle more users or additional data sources.
@@ -48,9 +48,9 @@ The results are visualized using **R Shiny dashboards**, enabling store owners t
 
 ### 3. Solution Architecture
 
-![Architecture](/images/2-Proposal/AWS_Architecture_2.jpg)
+![Architecture](/images/SBW_Architecture_V10.jpg)
 
-### AWS Services Used
+#### AWS Services Used
 
 - **Amazon Cognito**: Handles user authentication and authorization for both administrators and website customers, ensuring secure access to the e-commerce platform.
 - **Amazon S3**: Acts as a centralized data storage layer — hosting the static website front-end and storing raw clickstream logs collected from user interactions. It also temporarily holds batch files before they are processed and transferred to the data warehouse.
@@ -219,7 +219,7 @@ Purpose: run ETL + host the curated analytical store that Shiny queries. Two cho
 - Ingest Lambda: s3:PutObject to raw bucket (scoped to prefix), s3:ListBucket on needed prefixes.
 - ETL Lambda: s3:GetObject/ListBucket on raw prefixes; permission to fetch secrets from SSM Parameter Store; no broad S3 access.
 - EC2 roles: read/write only to its own DB/volumes; optional read to S3 for backups.
-- Shiny EC2: no write to S3 raw; read-only to Postgres as needed
+- Shiny EC2: no write to S3 raw; read-only to Postgres as needed.
 
 **Network**
 

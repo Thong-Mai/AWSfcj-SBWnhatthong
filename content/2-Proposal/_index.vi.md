@@ -9,7 +9,7 @@ pre: " <b> 2. </b> "
 
 # Batch-based Clickstream Analytics Platform
 
-### 1. Tóm tắt điều hành
+### 1. Tóm tắt 
 
 Dự án này nhằm **thiết kế và triển khai Batch-based Clickstream Analytics Platform** cho một website thương mại điện tử chuyên về **máy tính và phụ kiện** (giao diện frontend của website được tích hợp một **JavaScript SDK** nhẹ để gửi dữ liệu hoạt động của người dùng như **clicks**, **views**, **searches** tới **backend API**) bằng cách sử dụng **AWS Cloud Services**.
 Hệ thống thu thập dữ liệu tương tác của người dùng (như **clicks**, **searches**, và **page visits**) từ website và lưu trữ chúng trong **Amazon S3** dưới dạng **raw logs**. Cứ mỗi giờ, **Amazon EventBridge** sẽ kích hoạt **AWS Lambda** để xử lý và chuyển đổi dữ liệu trước khi nạp vào **data warehouse** được lưu trữ trên **Amazon EC2**.
@@ -18,9 +18,9 @@ Dữ liệu đã được xử lý sẽ được visualize thông qua **R Shiny 
 
 Kiến trúc này tập trung vào **batch analytics**, **ETL pipeline**, và **business intelligence**, đồng thời đảm bảo **bảo mật (security)**, **khả năng mở rộng (scalability)**, và **hiệu quả chi phí (cost efficiency)** thông qua việc tận dụng các **AWS managed services**.
 
-### 2. Tuyên bố vấn đề
+### 2. Vấn đề đặt ra
 
-### Vấn đề hiện tại là gì?
+#### Vấn đề hiện tại là gì?
 
 Các website E-commerce tạo ra một lượng lớn **clickstream data** — bao gồm product views, cart actions, và search activities — chứa đựng nhiều business insights có giá trị.
 
@@ -30,18 +30,16 @@ Kết quả là, họ gặp khó khăn trong việc:
 
 - Hiểu hành vi mua hàng của khách hàng (customer purchasing behavior)
 - Xác định sản phẩm hoạt động hiệu quả nhất (top-performing products)
-- Tối ưu hóa marketing campaigns** và **hiệu suất website (website performance)
+- Tối ưu hóa marketing campaigns và hiệu suất website (website performance)
 - Ra quyết định về tồn kho (inventory) và giá cả (pricing) dựa trên dữ liệu (data-driven decisions)
 
-### Giải pháp
+#### Giải pháp
 
 Dự án này giới thiệu một **AWS-based batch clickstream analytics** system, tự động **collect** dữ liệu tương tác của người dùng từ website mỗi giờ, process thông qua serverless functions, và lưu trữ vào central data warehouse trên **Amazon EC2**.
 
 Kết quả được visualize bằng **R Shiny dashboards**, giúp chủ cửa hàng có được actionable insights về hành vi khách hàng (customer behavior) và cải thiện hiệu suất kinh doanh tổng thể (overall business performance).
 
-### Lợi ích và hoàn vốn đầu tư
-
-### Lợi ích Chính
+#### Lợi ích và hoàn vốn đầu tư
 
 - **Data-driven decision making**: Khám phá sở thích của khách hàng, sản phẩm phổ biến và xu hướng mua sắm.
 - **Scalable and modular design**: Dễ dàng mở rộng để xử lý nhiều người dùng hơn hoặc tích hợp thêm các nguồn dữ liệu mới.
@@ -50,9 +48,9 @@ Kết quả được visualize bằng **R Shiny dashboards**, giúp chủ cửa 
 
 ### 3. Kiến trúc giải pháp
 
-![Architecture](/images/2-Proposal/AWS_Architecture_2.jpg)
+![Architecture](/images/SBW_Architecture_V10.jpg)
 
-### Dịch vụ AWS sử dụng
+#### Dịch vụ AWS sử dụng
 
 - **Amazon Cognito**: Quản lý quá trình xác thực và phân quyền người dùng cho cả quản trị viên và khách hàng của website, đảm bảo quyền truy cập an toàn vào nền tảng e-commerce.
 - **Amazon S3**: Hoạt động như một lớp lưu trữ dữ liệu tập trung — lưu trữ giao diện website tĩnh (static website front-end) và các clickstream logs thô được thu thập từ tương tác người dùng. Ngoài ra, nó còn tạm thời lưu trữ các batch files trước khi được xử lý và chuyển đến data warehouse.
@@ -66,7 +64,7 @@ Kết quả được visualize bằng **R Shiny dashboards**, giúp chủ cửa 
 - **Amazon CloudWatch**: Thu thập và giám sát các metrics, logs, và trạng thái của các scheduled jobs từ Lambda và EC2 để duy trì độ tin cậy và khả năng quan sát hiệu suất hệ thống.
 - **Amazon SNS**: Gửi thông báo hoặc cảnh báo khi batch jobs hoàn thành, thất bại hoặc gặp lỗi, đảm bảo doanh nghiệp kịp thời nắm bắt tình trạng vận hành.
 
-### 4. Triển khai kỹ thuật
+### 4. Triển khai 
 
 #### End-to-end data flow
 
@@ -265,9 +263,9 @@ Mục đích: chạy ETL và lưu trữ analytical store được Shiny truy v�
 - R Shiny dashboard app: gồm 5 modules, triển khai với Nginx/ALB TLS setup.
 - Runbook: bao gồm alarms, on-call, backups, disaster recovery, freshness SLO, và cost guardrails.
 
-### 5. Lộ trình & Mốc triển khai
+### 5. Kế hoạch triển khai
 
-### Tiến độ dự án
+### Dự án theo tiến độ
 
 #### Tháng 1 – Học tập & Chuẩn bị
 
@@ -275,7 +273,7 @@ Nghiên cứu nhiều dịch vụ AWS bao gồm compute, storage, analytics và 
 Hiểu các khái niệm chính của cloud architecture, data pipelines và serverless computing.  
 Tổ chức các cuộc họp nhóm để thống nhất mục tiêu dự án và phân công trách nhiệm cho từng thành viên.
 
-#### Tháng 2 – Thiết kế kiến trúc & Tạo mẫu thử
+#### Tháng 2 – Thiết kế kiến trúc & Prototyping
 
 Thiết kế kiến trúc tổng thể của dự án và xác định luồng dữ liệu giữa các thành phần.  
 Thiết lập các tài nguyên AWS ban đầu như S3, Lambda, API Gateway, EventBridge và EC2.  
@@ -289,7 +287,7 @@ Tích hợp tất cả các dịch vụ AWS và đảm bảo độ tin cậy c�
 Thực hiện kiểm thử hiệu năng và chức năng.  
 Hoàn thiện tài liệu và chuẩn bị dự án cho buổi thuyết trình.
 
-### 6. Ước tính ngân sách
+### 6. Ước tính chi phí
 
 Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
 Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).
